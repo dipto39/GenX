@@ -4,7 +4,8 @@
 @include('frontend.layouts.head')
 
 <body>
-    @yield('index_container')
+    @include('frontend.layouts.topbar')
+    @yield('content')
     @include('frontend.layouts.footer')
     @include('frontend.layouts.script')
 
