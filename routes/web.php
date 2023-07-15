@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\backendController;
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Expr\FuncCall;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,9 +58,40 @@ Route::get('/admin/dashboard', function () {
 
 // Categories View
 
-Route::get('/admin/categories', function () {
-    return view('backend.categories');
-});
+
+Route::get('/admin/categories', [backendController::class,"categories"])->name('categories');
+
+// Add Categories
+Route::get('/admin/categories/add', [backendController::class,'addcategory'])->name('addcate');
+
+// Store Categories
+Route::post('/admin/categories/store', [backendController::class,"storecategory"])->name('storecate');
+
+// Edit Category
+Route::get('/admin/categories/edit/{id}', [backendController::class,'eidtcategory'])->name('editcate');
+
+// update Category 
+Route::post('/admin/categories/update/{id}', [backendController::class,'updatecategory'])->name('updatecate');
+
+// Delete Category
+Route::get('/admin/categories/delete/{id}', [backendController::class,'deletecategory'])->name('deletecate');
+
+
+
+// Add subCategories
+Route::get('/admin/subcategories/add', [backendController::class,'addsubcategory'])->name('addsubcate');
+
+// Store subCategories
+Route::post('/admin/subcategories/store', [backendController::class,"storesubcategory"])->name('storesubcate');
+
+// Edit SubCategory
+Route::get('/admin/subcategories/edit/{id}', [backendController::class,'eidtsubcategory'])->name('editsubcate');
+
+// update SubCategory 
+Route::post('/admin/subcategories/update/{id}', [backendController::class,'updatesubcategory'])->name('updatesubcate');
+
+// Delete SubCategory
+Route::get('/admin/subcategories/delete/{id}', [backendController::class,'deletesubcategory'])->name('deletesubcate');
 
 // Brands View
 

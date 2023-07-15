@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id('cid');
-            $table->string('cname');
-            $table->string('cimg');
-            $table->string('cdes')->nullable();
-            $table->integer('tp')->default(0);
-            $table->integer('status')->default(1);
+        Schema::create('subcategories', function (Blueprint $table) {
+            $table->id('sid');
+            $table->integer('cid');
+            $table->string('subcname');
+            $table->string('stp')->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('subcategories');
     }
 };
