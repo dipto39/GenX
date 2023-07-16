@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\backendController;
+use App\Http\Controllers\backend\brandController;
+use App\Http\Controllers\backend\categoryController;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -50,8 +51,12 @@ Route::get('/sell_on_genx',function(){
 
 // Backend Routes
 
+
 // DashBoard View
 
+Route::get('/admin', function () {
+    return view('backend.dashboard');
+});
 Route::get('/admin/dashboard', function () {
     return view('backend.dashboard');
 });
@@ -59,45 +64,59 @@ Route::get('/admin/dashboard', function () {
 // Categories View
 
 
-Route::get('/admin/categories', [backendController::class,"categories"])->name('categories');
+        Route::get('/admin/categories', [categoryController::class,"categories"])->name('categories');
 
-// Add Categories
-Route::get('/admin/categories/add', [backendController::class,'addcategory'])->name('addcate');
+        // Add Categories
+        Route::get('/admin/categories/add', [categoryController::class,'addcategory'])->name('addcate');
 
-// Store Categories
-Route::post('/admin/categories/store', [backendController::class,"storecategory"])->name('storecate');
+        // Store Categories
+        Route::post('/admin/categories/store', [categoryController::class,"storecategory"])->name('storecate');
 
-// Edit Category
-Route::get('/admin/categories/edit/{id}', [backendController::class,'eidtcategory'])->name('editcate');
+        // Edit Category
+        Route::get('/admin/categories/edit/{id}', [categoryController::class,'eidtcategory'])->name('editcate');
 
-// update Category 
-Route::post('/admin/categories/update/{id}', [backendController::class,'updatecategory'])->name('updatecate');
+        // update Category 
+        Route::post('/admin/categories/update/{id}', [categoryController::class,'updatecategory'])->name('updatecate');
 
-// Delete Category
-Route::get('/admin/categories/delete/{id}', [backendController::class,'deletecategory'])->name('deletecate');
+        // Delete Category
+        Route::get('/admin/categories/delete/{id}', [categoryController::class,'deletecategory'])->name('deletecate');
 
 
 
-// Add subCategories
-Route::get('/admin/subcategories/add', [backendController::class,'addsubcategory'])->name('addsubcate');
+        // Add subCategories
+        Route::get('/admin/subcategories/add', [categoryController::class,'addsubcategory'])->name('addsubcate');
 
-// Store subCategories
-Route::post('/admin/subcategories/store', [backendController::class,"storesubcategory"])->name('storesubcate');
+        // Store subCategories
+        Route::post('/admin/subcategories/store', [categoryController::class,"storesubcategory"])->name('storesubcate');
 
-// Edit SubCategory
-Route::get('/admin/subcategories/edit/{id}', [backendController::class,'eidtsubcategory'])->name('editsubcate');
+        // Edit SubCategory
+        Route::get('/admin/subcategories/edit/{id}', [categoryController::class,'eidtsubcategory'])->name('editsubcate');
 
-// update SubCategory 
-Route::post('/admin/subcategories/update/{id}', [backendController::class,'updatesubcategory'])->name('updatesubcate');
+        // update SubCategory 
+        Route::post('/admin/subcategories/update/{id}', [categoryController::class,'updatesubcategory'])->name('updatesubcate');
 
-// Delete SubCategory
-Route::get('/admin/subcategories/delete/{id}', [backendController::class,'deletesubcategory'])->name('deletesubcate');
+        // Delete SubCategory
+        Route::get('/admin/subcategories/delete/{id}', [categoryController::class,'deletesubcategory'])->name('deletesubcate');
 
 // Brands View
 
-Route::get('/admin/brands', function () {
-    return view('backend.brands');
-});
+        Route::get('/admin/brands', [brandController::class,"index"])->name('brands');
+
+        // Add Brand
+        Route::get('/admin/brands/add', [brandController::class,'addbrand'])->name('addbrand');
+
+        // Store Brand
+        Route::post('/admin/brands/store', [brandController::class,"storebrand"])->name('storebrand');
+
+        // Edit brand
+        Route::get('/admin/brands/edit/{id}', [brandController::class,'eidtbrand'])->name('editbrand');
+
+        // update brand 
+        Route::post('/admin/brands/update/{id}', [brandController::class,'updatebrand'])->name('updatebrand');
+
+        // Delete brand
+        Route::get('/admin/brands/delete/{id}', [brandController::class,'deletebrand'])->name('deletebrand');
+
 
 // About Us View
 

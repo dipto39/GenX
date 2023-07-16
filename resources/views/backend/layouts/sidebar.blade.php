@@ -1,13 +1,13 @@
 <div class="sidebar w-80 bg-[#2A3042] p-4">
     <div class="logo flex justify-center items-center">
-        <img class="w-20 max-h-20" src="../assets/logo/logo.png" alt="logo">
+        <a href="{{url('/admin')}}"><img class="w-20 max-h-20" src="{{asset('assets/logo/logo.png')}}" alt="logo"></a>    
     </div>
     <div class="sidebar_links text-slate-500 pt-4 overflow-scroll h-full pb-10">
         <h4 class="text-[12px] pb-2">MENU</h4>
         <div class="links text-[13px] ">
             <ul>
                 <li>
-                    <a href="{{url('/admin/dashboard')}}" class="{{ request()->is('admin/dashboard*') ? 'active' : '' }} flex items-center px-1 py-3 hover:text-white transition-all">
+                    <a href="{{url('/admin/dashboard')}}" class="{{ request()->is('admin/dashboard*') ? 'active' : '' }} {{ request()->is('admin') ? 'active' : '' }} flex items-center px-1 py-3 hover:text-white transition-all">
                         <span class="text-[17px] w-9"><i class="fa-solid fa-chart-line"></i></span>
                         <span>Dashboard</span>
                     </a>
