@@ -46,7 +46,7 @@
                         </td>
                         <td class="p-4">
                             <label class="switch">
-                                <input type="checkbox" class="switch_chekbox" data-attr="{{$item['bid']}}">
+                                <input type="checkbox" class="switch_chekbox" id="brand_status" data-attr="{{$item['bid']}}" @if ($item['status'] == 1) checked @endif>
                                 <span class="slider round"></span>
                             </label>
                         </td>

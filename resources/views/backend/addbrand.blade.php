@@ -10,7 +10,7 @@
                     @csrf
                     <label for="email w-100">
                         Brand Name
-                        <input class="w-full my-2 p-2 border outline-blue-500" type="text" name="brand_name" value="@if(isset($bvalue)) {{$cvalue[0]['bname']}} @endif  @if(old('brand_name')) old('brand_name') @endif">
+                        <input class="w-full my-2 p-2 border outline-blue-500" type="text" name="brand_name" value="@if(isset($bvalue)) {{$bvalue[0]['bname']}} @endif  @if(old('brand_name')) old('brand_name') @endif">
                     </label>
                     @if ($errors->first('brand_name'))
                     <span class="text-red-500">{{ $errors->first('brand_name') }}</span>
@@ -20,7 +20,7 @@
                         Logo
                         <div
                             class="image_input h-28 w-28 bg-slate-200 mt-2 flex justify-center items-center cursor-pointer">
-                            <input class="hidden" type="file" name="brand_img" id="brand_img">
+                            <input class="hidden" type="file" name="brand_img" id="prev_input_img">
                             <span class="plus_icon">+</span>
                             <img class="prev_img hidden z-10"
                                 src="." alt="">

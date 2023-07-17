@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\backend\aboutController;
 use App\Http\Controllers\backend\brandController;
 use App\Http\Controllers\backend\categoryController;
+use App\Http\Controllers\backend\settingController;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -109,20 +111,38 @@ Route::get('/admin/dashboard', function () {
         Route::post('/admin/brands/store', [brandController::class,"storebrand"])->name('storebrand');
 
         // Edit brand
-        Route::get('/admin/brands/edit/{id}', [brandController::class,'eidtbrand'])->name('editbrand');
+        Route::get('/admin/brands/edit/{id}', [brandController::class,'editbrand'])->name('editbrand');
 
         // update brand 
         Route::post('/admin/brands/update/{id}', [brandController::class,'updatebrand'])->name('updatebrand');
 
         // Delete brand
         Route::get('/admin/brands/delete/{id}', [brandController::class,'deletebrand'])->name('deletebrand');
+        // Change Status
+        Route::post('/admin/brands/status/{id}', [brandController::class,'change_status'])->name('change_status');
 
 
 // About Us View
 
-Route::get('/admin/about', function () {
-    return view('backend.about');
-});
+        Route::get('/admin/about', [aboutController::class,"index"])->name('about');
+
+        // Add Brand
+        Route::get('/admin/about/add', [aboutController::class,'addabout'])->name('addabout');
+
+        // Store about
+        Route::post('/admin/about/store', [aboutController::class,"storeabout"])->name('storeabout');
+
+        // Edit about
+        Route::get('/admin/about/edit/{id}', [aboutController::class,'editabout'])->name('editabout');
+
+        // update about 
+        Route::post('/admin/about/update/{id}', [aboutController::class,'updateabout'])->name('updateabout');
+
+        // Delete about
+        Route::get('/admin/about/delete/{id}', [aboutController::class,'deleteabout'])->name('deleteabout');
+        // Change Status
+        Route::post('/admin/about/status/{id}', [aboutController::class,'change_status'])->name('change_status');
+
 
 // Sliders View
 
@@ -180,9 +200,12 @@ Route::get('/admin/shipping/providers', function () {
 
 // Setting View
 
-Route::get('/admin/setting', function () {
-    return view('backend.setting');
-});
+Route::get('/admin/setting',[settingController::class,"index"])->name('setting');
+Route::post('/admin/setting/add',[settingController::class,"storeSetting"])->name('storeSetting');
+Route::post('/admin/setting/update/{id}',[settingController::class,"updateSetting"])->name('UpdateSetting');
 
+// Update admin Password
+
+Route::post('/admin/updatepass/{id}',[settingController::class,"updatepass"])->name('updatepass');
 
 

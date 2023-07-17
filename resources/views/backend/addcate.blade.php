@@ -31,7 +31,7 @@
             Category Img
             <div
                 class="image_input h-28 w-28 bg-slate-200 mt-2 flex justify-center items-center cursor-pointer">
-                <input class="hidden" type="file" name="cimg" id="brand_img" value="@if(isset($cvalue)) {{$cvalue[0]['cimg']}} @endif" >
+                <input class="hidden" type="file" name="cimg" id="prev_input_img" value="@if(isset($cvalue)) {{$cvalue[0]['cimg']}} @endif" >
                 <span class="plus_icon">+</span>
                 <img class="prev_img  z-10"
                     src="@if(isset($cvalue)) {{$cvalue[0]['cimg']}} @endif" alt="">

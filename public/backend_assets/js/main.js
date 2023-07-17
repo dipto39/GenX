@@ -10,14 +10,14 @@ let logo = document.querySelector('.logo');
 let subLink = document.querySelectorAll('.have_sublinks')
 
 for (let i = 0; i < subLink.length; i++) {
-    subLink[i].addEventListener('click',(e)=>{
-        e.preventDefault()
-    })
+  subLink[i].addEventListener('click', (e) => {
+    e.preventDefault()
+  })
 }
 var i;
 
 for (i = 0; i < subLink.length; i++) {
-  subLink[i].addEventListener("click", function() {
+  subLink[i].addEventListener("click", function () {
     /* Toggle between adding and removing the "active" class,
     to highlight the button that controls the panel */
     this.classList.toggle("active");
@@ -38,7 +38,7 @@ let subcategory = document.querySelectorAll('.down_icon')
 var i;
 
 for (i = 0; i < subcategory.length; i++) {
-  subcategory[i].addEventListener("click", function(e) {
+  subcategory[i].addEventListener("click", function (e) {
     this.classList.toggle("active");
     var panel = e.target.parentNode.parentNode.nextElementSibling;
     if (panel.style.display === "block") {
@@ -51,27 +51,169 @@ for (i = 0; i < subcategory.length; i++) {
 
 // preview image 
 
-document.querySelector('.image_input').addEventListener('click',function(e){
-  document.querySelector('#brand_img').click()
-})
-document.querySelector('#brand_img').onchange = evt => {
-  const [file] = document.querySelector('#brand_img').files
-  if (file) {
-    document.querySelector('.prev_img').src = URL.createObjectURL(file)
-    document.querySelector('.prev_img').classList.remove('hidden')
-    document.querySelector('.plus_icon').classList.add('hidden')
-  }
-}
+// document.querySelector('.image_input').addEventListener('click', function (e) {
+//   document.querySelector('#brand_img').click()
+// })
+// document.querySelector('#brand_img').onchange = evt => {
+//   const [file] = document.querySelector('#brand_img').files
+//   if (file) {
+//     document.querySelector('.prev_img').src = URL.createObjectURL(file)
+//     document.querySelector('.prev_img').classList.remove('hidden')
+//     document.querySelector('.plus_icon').classList.add('hidden')
+//   }
+// }
 // preview image 
 
-document.querySelector('.slider_img').addEventListener('click',function(e){
-  document.querySelector('#slider_img').click()
-})
-document.querySelector('#slider_img').onchange = evt => {
-  const [file] = document.querySelector('#slider_img').files
-  if (file) {
-    document.querySelector('.prev_img').src = URL.createObjectURL(file)
-    document.querySelector('.prev_img').classList.remove('hidden')
-    document.querySelector('.plus_icon').classList.add('hidden')
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('image_input')) {
+    document.querySelector('#prev_input_img').click()
   }
+
+})
+document.onchange = evt => {
+  if (evt.target.id == 'prev_input_img') {
+    const [file] = document.querySelector('#prev_input_img').files
+    if (file) {
+      document.querySelector('.prev_img').src = URL.createObjectURL(file)
+      document.querySelector('.prev_img').classList.remove('hidden')
+      document.querySelector('.plus_icon').classList.add('hidden')
+    }
+  }
+
 }
+
+// Open setting Tab
+
+function openStab(evt, tname) {
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("setting_btn");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].classList.remove('active')
+    }
+if(tname == 'site_details'){
+  document.getElementById(tname).style.display = "block";
+  document.getElementById('up_pass').style.display = "none";
+  evt.currentTarget.className += " active";
+}
+if(tname == 'up_pass'){
+  document.getElementById(tname).style.display = "block";
+  document.getElementById('site_details').style.display = "none";
+  evt.currentTarget.className += " active";
+}
+
+}
+
+
+// Change Brand Status
+
+document.addEventListener('change', function (e) {
+  if (e.target.id == 'brand_status') {
+    let id = e.target.dataset.attr;
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    if (e.target.checked) {
+      fetch('/admin/brands/status/'+id, {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+              method: 'post',
+              credentials: "same-origin",
+              body: JSON.stringify({
+                  inactive:id
+              })
+          })
+          .then((Response) => Response.text())
+          .then((data) => {
+             console.log(data)
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+    } else {
+      var obj = {
+        inactive : id
+
+      }
+      var jsonData = JSON.stringify(obj)
+      fetch('/admin/brands/status/'+id, {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+              method: 'post',
+              credentials: "same-origin",
+              body: JSON.stringify({
+                  active:id
+              })
+          }).then((Response) => Response.text())
+          .then((data) => {
+             console.log(data)
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+    }
+  }
+
+})
+
+// Change About Status
+
+document.addEventListener('change', function (e) {
+  if (e.target.id == 'about_status') {
+    let id = e.target.dataset.attr;
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    if (e.target.checked) {
+      fetch('/admin/about/status/'+id, {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+              method: 'post',
+              credentials: "same-origin",
+              body: JSON.stringify({
+                  inactive:id
+              })
+          })
+          .then((Response) => Response.text())
+          .then((data) => {
+             console.log(data)
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+    } else {
+      var obj = {
+        inactive : id
+
+      }
+      var jsonData = JSON.stringify(obj)
+      fetch('/admin/about/status/'+id, {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+              method: 'post',
+              credentials: "same-origin",
+              body: JSON.stringify({
+                  active:id
+              })
+          }).then((Response) => Response.text())
+          .then((data) => {
+             console.log(data)
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+    }
+  }
+
+})

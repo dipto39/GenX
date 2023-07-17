@@ -14,38 +14,13 @@
         </div>
     </div>
     <div class="about_body">
-        <dialog id="about_modal" class="modal p-8">
-            <form method="dialog" class="modal-box">
-                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                <div class="login_box">
-                    <div class="login_box w-full text-slate-800">
-                        <h3 class="text-center text-[16px]">Section</h3>
-                        <p class="text-red-500 hidden">Error Message</p>
-                        <form action="">
-                            <label for="email w-100">
-                                Title
-                                <input class="w-full my-2 p-2 border outline-blue-500" type="text">
-                            </label>
-                            <label for="">
-                                Description
-                                <textarea class="w-full border" name="" id="" cols="30"
-                                    rows="10"></textarea>
-                            </label>
-
-                            <button type="submit" class="my-2 p-2 bg-blue-500 text-white">Add
-                                Brand</button>
-                        </form>
-                    </div>
-                </div>
-            </form>
-        </dialog>
         <div class="brandtable p-4 pt-4 bg-white ">
             <div class="oth flex justify-between items-center pt-4">
                 <h3 class="text-[16px] font-semibold text-gray-600">About Us</h3>
-                <span class="bg-blue-400 text-white p-2 text-[14px] rounded-md cursor-pointer"
-                    onclick="about_modal.showModal()">Add Section</span>
+                <a href="{{url('admin/about/add')}}" class="bg-blue-400 text-white p-2 text-[14px] rounded-md cursor-pointer"
+                >Add About</a>
             </div>
-
+            @if (count($about) > 0)
             <table class="w-full text-[14px] text-gray-700 bg-white mt-5">
                 <thead>
                     <tr class="bg-gray-200">
@@ -56,24 +31,35 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
+                    @php
+                    $i=1;
+                @endphp
+                @foreach ($about as $item)
                     <tr class="border-b">
-                        <td class="p-4">1</td>
-                        <td class="p-4">Why Us</td>
+                        <td class="p-4">{{$i}}</td>
+                        <td class="p-4">{{$item['title']}}</td>
                         <td class="p-4">
                             <label class="switch">
-                                <input type="checkbox" class="switch_chekbox">
+                                <input type="checkbox" class="switch_chekbox" id="about_status" data-attr="{{$item['id']}}" @if ($item['status'] == 1) checked @endif>
                                 <span class="slider round"></span>
                             </label>
                         </td>
                         <td class="p-4 flex justify-evenly text-[16px]">
                             <a class="border-blue-500 text-blue-500 px-1 border hover:bg-blue-500 hover:text-white"
-                                href=""><i class="fa-regular fa-pen-to-square"></i></a>
+                                href="{{url('admin/about/edit/'.$item['id'])}}"><i class="fa-regular fa-pen-to-square"></i></a>
                             <a class="border-red-500 text-red-500 px-1  border hover:bg-red-500 hover:text-white"
-                                href=""><i class="fa-solid fa-trash"></i></a>
+                                href="{{url('admin/about/delete/'.$item['id'])}}"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
+                    @php
+                    $i++;
+                @endphp
+                @endforeach
                 </tbody>
             </table>
+            @else
+            <h1 class="text-center text-red-500">No About Section Found !</h1>
+        @endif
         </div>
     </div>
 </div>
