@@ -55,9 +55,9 @@
                     </a>
                     <ul class="sub_links ml-10 hidden">
                         <li class="text-[12px] py-2"><a class="{{ request()->is('admin/products*') ? 'active' : '' }} hover:text-white" href="{{url('/admin/products')}}">Product List</a></li>
-                        <li class="text-[12px] py-2"><a class="{{url('/admin/units')}} hover:text-white" href="">Units</a></li>
-                        <li class="text-[12px] py-2"><a class="{{url('/admin/attributes')}} hover:text-white" href="">Attributes</a></li>
-                        <li class="text-[12px] py-2"><a class="{{url('/admin/tags')}} hover:text-white" href="">Tags</a></li>
+                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/units')}}">Units</a></li>
+                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/attributes')}}">Attributes</a></li>
+                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/tags')}}">Tags</a></li>
                     </ul>
                 </li>
                 <li>

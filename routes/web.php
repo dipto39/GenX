@@ -3,7 +3,9 @@
 use App\Http\Controllers\backend\aboutController;
 use App\Http\Controllers\backend\brandController;
 use App\Http\Controllers\backend\categoryController;
+use App\Http\Controllers\backend\productController;
 use App\Http\Controllers\backend\settingController;
+use App\Http\Controllers\backend\unitController;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -152,15 +154,45 @@ Route::get('/admin/sliders', function () {
 
 // Products View
 
-Route::get('/admin/products', function () {
-    return view('backend.productlist');
-});
+        
+        Route::get('/admin/products',[productController::class,"index"])->name('products');
+
+        // Add product
+        Route::get('/admin/product/add', [productController::class,'addproduct'])->name('addproduct');
+
+        // // Store product
+        Route::post('/admin/product/store', [productController::class,"storeproduct"])->name('storeproduct');
+
+        // // Edit product
+        // Route::get('/admin/product/edit/{id}', [productController::class,'editproduct'])->name('editproduct');
+
+        // // update product 
+        // Route::post('/admin/product/update/{id}', [productController::class,'updateproduct'])->name('updateproduct');
+
+        // // Delete product
+        // Route::get('/admin/product/delete/{id}', [productController::class,'deleteproduct'])->name('deleteproduct');
+
 
 // Units View
 
-Route::get('/admin/products/units', function () {
-    return view('backend.units');
-});
+        Route::get('/admin/units',[unitController::class,"index"])->name('units');
+
+        // Add unit
+        Route::get('/admin/unit/add', [unitController::class,'addunit'])->name('addunit');
+
+        // Store unit
+        Route::post('/admin/unit/store', [unitController::class,"storeunit"])->name('storeunit');
+
+        // Edit unit
+        Route::get('/admin/unit/edit/{id}', [unitController::class,'editunit'])->name('editunit');
+
+        // update unit 
+        Route::post('/admin/unit/update/{id}', [unitController::class,'updateunit'])->name('updateunit');
+
+        // Delete unit
+        Route::get('/admin/unit/delete/{id}', [unitController::class,'deleteunit'])->name('deleteunit');
+
+
 
 // Sliders View
 
