@@ -87,9 +87,9 @@
                         <span class="downarrow"><i class="fa-solid fa-angle-down"></i></span>
                     </a>
                     <ul class="sub_links ml-10 hidden">
-                        <li class="text-[12px] py-2"><a class="{{url('/admin/shipping/charge')}} hover:text-white" href="">Shipping Charge</a>
+                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/shipping/charge')}}">Shipping Charge</a>
                         </li>
-                        <li class="text-[12px] py-2"><a class="{{url('/admin/shipping/providers')}} hover:text-white" href="">Shipping Providers</a>
+                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/shipping/providers')}}">Shipping Providers</a>
                         </li>
                     </ul>
                 </li>
@@ -105,20 +105,6 @@
                         </li>
                         <li class="text-[12px] py-2"><a class=" hover:text-white" href="">Vendor List</a></li>
 
-                    </ul>
-                </li>
-                <li>
-                    <a href=""
-                        class="flex items-center px-1 py-3 hover:text-white transition-all relative have_sublinks">
-                        <span class="text-[17px] w-9"><i class="fa-solid fa-user"></i></span>
-                        <span>General Account</span>
-                        <span class="downarrow"><i class="fa-solid fa-angle-down"></i></span>
-                    </a>
-                    <ul class="sub_links ml-10 hidden">
-                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="">Account Overview</a>
-                        </li>
-                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="">Order Products</a>
-                        </li>
                     </ul>
                 </li>
                 <li>

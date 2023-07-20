@@ -103,10 +103,31 @@ if(tname == 'up_pass'){
 
 }
 
+// prev all input image
 
-// Change Brand Status
+let prevbox=document.querySelectorAll('.prev_box');
+let img_inputs=document.querySelectorAll('.img_input');
+prevbox.forEach((e)=>{
+  e.addEventListener('click',function(e){
+    this.querySelector('.img_input').click();
+  })
+})
+img_inputs.forEach((e)=>{
+  e.addEventListener('change',function(e){
+    const [file] =e.target.files;
+    if(file){
+      this.parentNode.querySelector('img').src=URL.createObjectURL(file)
+      this.parentNode.querySelector('span').style.display ='none'
+    }
+    
+  })
+})
+
+
 
 document.addEventListener('change', function (e) {
+// Change Brand Status
+
   if (e.target.id == 'brand_status') {
     let id = e.target.dataset.attr;
     let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -158,12 +179,8 @@ document.addEventListener('change', function (e) {
           });
     }
   }
-
-})
-
 // Change About Status
 
-document.addEventListener('change', function (e) {
   if (e.target.id == 'about_status') {
     let id = e.target.dataset.attr;
     let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -183,7 +200,7 @@ document.addEventListener('change', function (e) {
           })
           .then((Response) => Response.text())
           .then((data) => {
-             console.log(data)
+            console.log(data)
           })
           .catch(function(error) {
               console.log(error);
@@ -208,7 +225,7 @@ document.addEventListener('change', function (e) {
               })
           }).then((Response) => Response.text())
           .then((data) => {
-             console.log(data)
+            console.log(data)
           })
           .catch(function(error) {
               console.log(error);
@@ -216,4 +233,147 @@ document.addEventListener('change', function (e) {
     }
   }
 
+// Change product Status
+
+  if (e.target.classList.contains('product_status')) {
+    let id = e.target.dataset.attr;
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    if (e.target.checked) {
+      fetch('/admin/product/status/'+id, {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+              method: 'post',
+              credentials: "same-origin",
+              body: JSON.stringify({
+                  inactive:id
+              })
+          })
+          .then((Response) => Response.text())
+          .then((data) => {
+            console.log(data)
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+    } else {
+      var obj = {
+        inactive : id
+
+      }
+      var jsonData = JSON.stringify(obj)
+      fetch('/admin/product/status/'+id, {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+              method: 'post',
+              credentials: "same-origin",
+              body: JSON.stringify({
+                  active:id
+              })
+          }).then((Response) => Response.text())
+          .then((data) => {
+            console.log(data)
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+    }
+  }
+// filter and search product
+  
+  if(e.target.classList.contains('filter_input')){
+    var select = select_f.value;
+    var brand = select_brand.value;
+    var cate = select_category.value;
+    var sval = search_product.value;
+    var faval = "fads";
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      fetch('/admin/product/filter/'+faval, {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+              method: 'post',
+              credentials: "same-origin",
+              body: JSON.stringify({
+                  select : select,
+                  brand : brand,
+                  cate : cate,
+                  sval : sval
+              })
+          })
+          .then((Response) => Response.text())
+          .then((data) => {
+          document.querySelector('.ptbody').innerHTML =data
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+    }
+
+// Change coupon Status
+
+if (e.target.classList.contains('coupon_status')) {
+  let id = e.target.dataset.attr;
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  if (e.target.checked) {
+    fetch('/admin/coupon/status/'+id, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token
+                },
+            method: 'post',
+            credentials: "same-origin",
+            body: JSON.stringify({
+                inactive:id
+            })
+        })
+        .then((Response) => Response.text())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+  } else {
+    var obj = {
+      inactive : id
+
+    }
+    var jsonData = JSON.stringify(obj)
+    fetch('/admin/coupon/status/'+id, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token
+                },
+            method: 'post',
+            credentials: "same-origin",
+            body: JSON.stringify({
+                active:id
+            })
+        }).then((Response) => Response.text())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+  }
+}
 })
+
+
+

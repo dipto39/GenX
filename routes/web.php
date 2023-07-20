@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\aboutController;
 use App\Http\Controllers\backend\brandController;
 use App\Http\Controllers\backend\categoryController;
+use App\Http\Controllers\backend\couponController;
 use App\Http\Controllers\backend\productController;
 use App\Http\Controllers\backend\settingController;
 use App\Http\Controllers\backend\unitController;
@@ -154,7 +155,6 @@ Route::get('/admin/sliders', function () {
 
 // Products View
 
-        
         Route::get('/admin/products',[productController::class,"index"])->name('products');
 
         // Add product
@@ -164,14 +164,20 @@ Route::get('/admin/sliders', function () {
         Route::post('/admin/product/store', [productController::class,"storeproduct"])->name('storeproduct');
 
         // // Edit product
-        // Route::get('/admin/product/edit/{id}', [productController::class,'editproduct'])->name('editproduct');
+        Route::get('/admin/product/edit/{id}', [productController::class,'editproduct'])->name('editproduct');
 
         // // update product 
-        // Route::post('/admin/product/update/{id}', [productController::class,'updateproduct'])->name('updateproduct');
+        Route::post('/admin/product/update/{id}', [productController::class,'updateproduct'])->name('updateproduct');
 
         // // Delete product
-        // Route::get('/admin/product/delete/{id}', [productController::class,'deleteproduct'])->name('deleteproduct');
+        Route::get('/admin/product/delete/{id}', [productController::class,'deleteproduct'])->name('deleteproduct');
 
+        // Change Status
+
+        Route::post('/admin/product/status/{id}', [productController::class,'change_status'])->name('change_product_status');
+        
+        // filter & Search 
+        Route::post('/admin/product/filter/{val}', [productController::class,'filter'])->name('filter_products');
 
 // Units View
 
@@ -202,9 +208,24 @@ Route::get('/admin/sliders', function () {
 
 // Coupons View
 
-Route::get('/admin/coupons', function () {
-    return view('backend.coupone');
-});
+        Route::get('/admin/coupons', [couponController::class,"index"])->name('coupons');
+
+        // Add coupon
+        Route::get('/admin/coupon/add', [couponController::class,'addcoupon'])->name('addcoupon');
+
+        // Store coupon
+        Route::post('/admin/coupon/store', [couponController::class,"storecoupon"])->name('storecoupon');
+
+        // Edit coupon
+        Route::get('/admin/coupon/edit/{id}', [couponController::class,'editcoupon'])->name('editcoupon');
+
+        // update coupon 
+        Route::post('/admin/coupon/update/{id}', [couponController::class,'updatecoupon'])->name('updatecoupon');
+
+        // Delete coupon
+        Route::get('/admin/coupon/delete/{id}', [couponController::class,'deletecoupon'])->name('deletecoupon');
+        // Change Status
+        Route::post('/admin/coupon/status/{id}', [couponController::class,'change_status'])->name('change_status');
 
 // Orders View
 
@@ -241,3 +262,6 @@ Route::post('/admin/setting/update/{id}',[settingController::class,"updateSettin
 Route::post('/admin/updatepass/{id}',[settingController::class,"updatepass"])->name('updatepass');
 
 
+
+// test route
+// Route::post('/admin/test/{data?}',[productController::class,"test"])->name('testdata');

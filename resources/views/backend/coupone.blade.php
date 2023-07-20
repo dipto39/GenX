@@ -14,93 +14,11 @@
         </div>
     </div>
     <div class="coupons_body">
-        <dialog id="coupons_modal" class="modal p-8">
-            <form method="dialog" class="text-[14px] modal-box w-96">
-                <div class="flex justify-between items-center p-4 mb-4 border-b">
-                    <h3 class="text-[16px]">Coupons</h3>
-                    <button class="btn btn-sm btn-circle btn-ghost">✕</button>
-                </div>
-                    <div class="grid grid-cols-2 gap-x-6">
-                        <div class="form_left flex-1">
-                            <label for="">
-                                <p>Company Name</p>
-                                <input class="w-full p-2 border my-2 mb-4 outline-none rounded-md"
-                                    type="text">
-                            </label>
-                            <label for="">
-                                <p>App Title</p>
-                                <input class="w-full p-2 border my-2 mb-4 outline-none rounded-md"
-                                    type="text">
-                            </label>
-                            <label for="">
-                                <p>Primary Email</p>
-                                <input class="w-full p-2 border my-2 mb-4 outline-none rounded-md"
-                                    type="email">
-                            </label>
-                            <label for="">
-                                <p>Secondary Email</p>
-                                <input class="w-full p-2 border my-2 mb-4 outline-none rounded-md"
-                                    type="email">
-                            </label>
-                            <label for="">
-                                <p>Primary Phone</p>
-                                <input class="w-full p-2 border my-2 mb-4 outline-none rounded-md"
-                                    type="text">
-                            </label>
-                            <label for="">
-                                <p>Secondary Phone</p>
-                                <input class="w-full p-2 border my-2 mb-4 outline-none rounded-md"
-                                    type="text">
-                            </label>
-                        </div>
-                        <div class="form_right flex-1">
-                            <label for="">
-                                <p>Currency</p>
-                                <input class="w-full p-2 border my-2 mb-4 outline-none rounded-md"
-                                    type="text">
-                            </label>
-                            <label for="">
-                                <p>Currency Symbol</p>
-                                <input class="w-full p-2 border my-2 mb-4 outline-none rounded-md"
-                                    type="text">
-                            </label>
-                            <label for="">
-                                <p>Default Shipping Charge</p>
-                                <input class="w-full p-2 border my-2 mb-4 outline-none rounded-md"
-                                    type="number">
-                            </label>
-                            <label for="">
-                                <p>Vat (%)</p>
-                                <input class="w-full p-2 border my-2 mb-4 outline-none rounded-md"
-                                    type="number">
-                            </label>
-                            <label for="">
-                                <p>Main Site URL</p>
-                                <input class="w-full p-2 border my-2 mb-4 outline-none rounded-md"
-                                    type="url">
-                            </label>
-                            <label for="">
-                                <p>Site Logo</p>
-                                <div
-                                    class="image_input h-28 w-28 bg-slate-200 mt-2 flex justify-center items-center cursor-pointer">
-                                    <input class="hidden" type="file" name="" id="brand_img">
-                                    <span class="plus_icon">+</span>
-                                    <img class="prev_img hidden z-10" src="../assets/img/brand/anker.png"
-                                        alt="">
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <input class="bg-blue-800 px-4 py-2 rounded-md text-white" type="submit" value="Save">
-                </form>
-            </form>
-        </dialog>
         <div class="brandtable p-4 pt-4 mt-3 bg-white ">
             <div class="oth flex justify-between items-center pt-4">
                 <h3 class="text-[16px] font-semibold text-gray-600">Coupons</h3>
-                <span class="bg-blue-400 text-white p-2 text-[14px] rounded-md cursor-pointer"
-                    onclick="coupons_modal.showModal()">Add Coupons</span>
+                <a href="{{url('admin/coupon/add')}}" class="bg-blue-400 text-white p-2 text-[14px] rounded-md cursor-pointer"
+                >Add Coupon</a>
             </div>
 
             <table class="w-full text-[14px] text-gray-700 bg-white mt-5">
@@ -110,43 +28,56 @@
                         <th class="p-4">Title</th>
                         <th class="p-4">Code</th>
                         <th class="p-4">Value</th>
-                        <th class="p-4">Shipping</th>
                         <th class="p-4">Min Spend</th>
                         <th class="p-4">End Date</th>
                         <th class="p-4">Status</th>
                         <th class="p-4">Action</th>
                     </tr>
                 </thead>
+                @if (count($coupons) > 0)
                 <tbody class="text-center">
+                    @php
+                    $i=1;
+                @endphp
+                @foreach ($coupons as $item)
                     <tr class="border-b">
-                        <td class="p-4">1</td>
-                        <td class="p-4">NewYear</td>
+                        <td class="p-4">{{$i}}</td>
+                        <td class="p-4">{{$item['cn']}}</td>
                         <td class="p-4">
-                           2024
+                            {{$item['cd']}}
                         </td>
                         <td class="p-4">
-                            100.00 %
+                            {{$item['vl']}} %
                          </td>
                          <td class="p-4">
-                           <span class="text-green-500">Free</span>
+                            {{$item['ms']}}
                          </td>
                          <td class="p-4">
-                            1.00
-                         </td>
-                         <td class="p-4">
-                           2023-07-10
+                            {{$item['ed']}}
                          </td>
                         
                         <td class="p-4">
-                           <p class="text-green-500">Active</p>
+                            <label class="switch">
+                                <input type="checkbox" class="switch_chekbox coupon_status" data-attr="{{$item['id']}}" @if ($item['st'] == 1)
+                                    checked
+                                @endif>
+                                <span class="slider round"></span>
+                            </label>
                         </td>
                         <td class="p-4 flex justify-evenly text-[16px]">
                             <a class="border-blue-500 text-blue-500 px-1 border hover:bg-blue-500 hover:text-white"
-                                href=""><i class="fa-regular fa-pen-to-square"></i></a>
+                                href="{{url('admin/coupon/edit/'.$item['id'])}}"><i class="fa-regular fa-pen-to-square"></i></a>
                             <a class="border-red-500 text-red-500 px-1  border hover:bg-red-500 hover:text-white"
-                                href=""><i class="fa-solid fa-trash"></i></a>
+                                href="{{url('admin/coupon/delete/'.$item['id'])}}"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
+                    @php
+                    $i++;
+                @endphp
+                @endforeach
+                @else
+                <tr><td colspan="8" ><h1 class="text-center text-red-500">No Coupon Found !</h1></td></tr>
+             @endif
                 </tbody>
             </table>
         </div>

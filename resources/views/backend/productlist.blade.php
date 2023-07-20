@@ -22,38 +22,56 @@
             <div class="products_filter flex justify-between items-center py-4">
                 <div class="filter">
                     <label for="">
-                        <select name="" id=""
-                            class="mx-2 outline-none cursor-pointer p-3 px-6 text-[12px] text-gray-500">
+                        <select name="vendor" id=""
+                            class="mx-2 outline-none cursor-pointer p-3 px-6 text-[12px] text-gray-500 bg-white border">
                             <option value="" selected disabled>Select Vendor</option>
                         </select>
                     </label>
-                    <label for="">
-                        <select name="" id=""
-                            class="mx-2 outline-none cursor-pointer p-3 px-6 text-[12px] text-gray-500">
-                            <option value="" selected disabled>Select Vendor</option>
+                    <label for="" class="relative"> 
+                        <span class="absolute text-bold cursor-pointer z-50 text-[12px] unselect_all hidden" style="top: 40%;right:20%;transform:translate(-50%,-20%)">X</span>
+                        <select name="" id="select_f"
+                        class="mx-2 outline-none cursor-pointer p-3 px-6 text-[12px] text-gray-500 bg-white border filter_input ">
+                       
+                        <option value="" selected disabled>Select section</option>
+                        <option value="1">Flash Deals </option>
+                        <option value="2">New Arrival</option>
+                    </select>
+                    </label>
+                    <label for="" class="relative">
+                        <span class="absolute text-bold cursor-pointer z-50 text-[12px] unselect_all hidden" style="top: 40%;right:20%;transform:translate(-50%,-20%)">X</span>
+                        <select name="" id="select_category"
+                            class="mx-2 outline-none cursor-pointer p-3 px-6 text-[12px] text-gray-500 bg-white border filter_input">
+                            <option value="" selected disabled>Select Category</option>
+                            @if (count($category) > 0)
+                            @foreach ($category as $item)
+                            <option value="{{$item['id']}}">{{$item['cname']}}</option>
+                            @endforeach
+                            @endif
+                           
                         </select>
                     </label>
-                    <label for="">
-                        <select name="" id=""
-                            class="mx-2 outline-none cursor-pointer p-3 px-6 text-[12px] text-gray-500">
-                            <option value="" selected disabled>Select Vendor</option>
-                        </select>
-                    </label>
-                    <label for="">
-                        <select name="" id=""
-                            class="mx-2 outline-none cursor-pointer p-3 px-6 text-[12px] text-gray-500">
-                            <option value="" selected disabled>Select Vendor</option>
+                    <label for="" class="relative">
+                        <span class="absolute text-bold cursor-pointer z-50 text-[12px] unselect_all hidden" style="top: 40%;right:20%;transform:translate(-50%,-20%)">X</span>
+                        <select name="" id="select_brand"
+                            class="mx-2 outline-none cursor-pointer p-3 px-6 text-[12px] text-gray-500 bg-white border filter_input">
+                            <option value="" selected disabled>Select Brand</option>
+                            @if (count($brands) > 0)
+                            @foreach ($brands as $item)
+                            <option value="{{$item['bid']}}">{{$item['bname']}}</option>
+                            @endforeach
+                            @endif
                         </select>
                     </label>
                 </div>
                 <div class="search">
                     <div class="input-group flex relative">
+                        <span class="absolute text-bold cursor-pointer z-50 text-[12px] unselect_all hidden" style="top: 40%;right:20%;transform:translate(-50%,-20%)">X</span>
                         <i class="fa-solid fa-magnifying-glass absolute top-3 left-3 text-gray-500"></i>
-                        <input type="text" placeholder="Search…" class="border p-2 ps-11 rounded-md" />
+                        <input type="search" id="search_product" placeholder="Search…" class="border p-2 ps-11 rounded-md filter_input" />
                     </div>
                 </div>
             </div>
-            @if (count($products) > 0)
+           
             <table class="w-full text-[14px] text-gray-700 bg-white mt-5">
                 <thead>
                     <tr class="bg-gray-200">
@@ -67,7 +85,8 @@
                         <th class="p-4">Action</th>
                     </tr>
                 </thead>
-                <tbody class="text-center">
+                <tbody class="text-center ptbody">
+                     @if (count($products) > 0)
                     @php
                     $i=1;
                 @endphp
@@ -85,17 +104,26 @@
                             {{$item['sku']}}
                         </td>
                         <td class="p-4">
-                            {{$item['bname']}}
+                            @foreach ($brands as $item2)
+                            @if ($item2['bid'] == $item['brand'])
+                                {{$item2['bname']}}                                
+                            @endif
+                            @endforeach
+            
                         </td>
                         <td class="p-4">
-                            {{$item['cname']}}
+                            @foreach ($category as $item2)
+                            @if ($item2['id'] == $item['ct'])
+                                {{$item2['cname']}}                                
+                            @endif
+                            @endforeach
                         </td>
                         <td class="p-4">
                             {{$item['price']}}
                         </td>
                         <td class="p-4">
                             <label class="switch">
-                                <input type="checkbox" class="switch_chekbox" @if ($item['status'] == 1)
+                                <input type="checkbox" class="switch_chekbox product_status" data-attr="{{$item['pid']}}" @if ($item['status'] == 1)
                                     checked
                                 @endif>
                                 <span class="slider round"></span>
@@ -112,11 +140,12 @@
                     $i++;
                 @endphp
                 @endforeach
+                @else
+                  <h1 class="text-center text-red-500">No products Found !</h1>
+             @endif
                 </tbody>
             </table>
-            @else
-            <h1 class="text-center text-red-500">No products Found !</h1>
-        @endif
+            
         </div>
     </div>
 </div>
