@@ -3,7 +3,7 @@
         <i class="fa-solid fa-bars"></i>
     </div>
     <div class="logout text-red-500 hover:text-red-400 text-[14px]">
-        <a href="" class="flex items-center">
+        <a href="{{url('admin/logout')}}" class="flex items-center">
             <i class="fa-solid fa-power-off"></i>
             <span class="ms-2">Logout</span>
         </a>

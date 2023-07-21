@@ -43,6 +43,14 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'login' => [
+        \App\Http\Middleware\LoginCheck::class
+
+        ],
+        'logout' => [
+            \App\Http\Middleware\Logout::class
+    
+            ]
     ];
 
     /**
