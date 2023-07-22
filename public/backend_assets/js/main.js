@@ -322,57 +322,110 @@ document.addEventListener('change', function (e) {
 
 // Change coupon Status
 
-if (e.target.classList.contains('coupon_status')) {
-  let id = e.target.dataset.attr;
-  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  if (e.target.checked) {
-    fetch('/admin/coupon/status/'+id, {
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json, text-plain, */*",
-                "X-Requested-With": "XMLHttpRequest",
-                "X-CSRF-TOKEN": token
-                },
-            method: 'post',
-            credentials: "same-origin",
-            body: JSON.stringify({
-                inactive:id
-            })
-        })
-        .then((Response) => Response.text())
-        .then((data) => {
-          console.log(data)
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
-  } else {
-    var obj = {
-      inactive : id
+  if (e.target.classList.contains('coupon_status')) {
+    let id = e.target.dataset.attr;
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    if (e.target.checked) {
+      fetch('/admin/coupon/status/'+id, {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+              method: 'post',
+              credentials: "same-origin",
+              body: JSON.stringify({
+                  inactive:id
+              })
+          })
+          .then((Response) => Response.text())
+          .then((data) => {
+            console.log(data)
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+    } else {
+      var obj = {
+        inactive : id
 
+      }
+      var jsonData = JSON.stringify(obj)
+      fetch('/admin/coupon/status/'+id, {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+              method: 'post',
+              credentials: "same-origin",
+              body: JSON.stringify({
+                  active:id
+              })
+          }).then((Response) => Response.text())
+          .then((data) => {
+            console.log(data)
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
     }
-    var jsonData = JSON.stringify(obj)
-    fetch('/admin/coupon/status/'+id, {
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json, text-plain, */*",
-                "X-Requested-With": "XMLHttpRequest",
-                "X-CSRF-TOKEN": token
-                },
-            method: 'post',
-            credentials: "same-origin",
-            body: JSON.stringify({
-                active:id
-            })
-        }).then((Response) => Response.text())
-        .then((data) => {
-          console.log(data)
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
   }
-}
+
+// Allow Cash On Delevary
+  if (e.target.classList.contains('cod_change')) {
+    let id = e.target.dataset.attr;
+    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    if (e.target.checked) {
+      fetch('/admin/shipping/allowcod/'+id, {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+              method: 'post',
+              credentials: "same-origin",
+              body: JSON.stringify({
+                  inactive:id
+              })
+          })
+          .then((Response) => Response.text())
+          .then((data) => {
+            console.log(data)
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+    } else {
+      var obj = {
+        inactive : id
+
+      }
+      var jsonData = JSON.stringify(obj)
+      fetch('/admin/shipping/allowcod/'+id, {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json, text-plain, */*",
+                  "X-Requested-With": "XMLHttpRequest",
+                  "X-CSRF-TOKEN": token
+                  },
+              method: 'post',
+              credentials: "same-origin",
+              body: JSON.stringify({
+                  active:id
+              })
+          }).then((Response) => Response.text())
+          .then((data) => {
+            console.log(data)
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+    }
+  }
 })
 
 

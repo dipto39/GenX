@@ -9,8 +9,10 @@ use App\Http\Controllers\backend\LoginController;
 use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\backend\productController;
 use App\Http\Controllers\backend\settingController;
+use App\Http\Controllers\backend\shippingController;
 use App\Http\Controllers\backend\unitController;
 use App\Http\Middleware\LoginCheck as MiddlewareLoginCheck;
+use App\Models\shipping;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -267,11 +269,27 @@ Route::group(['prefix' => '/admin','middleware' => 'login'], function () {
         return view('backend.users');
     });
 
+
+
     // Shipping Charge View
 
-    Route::get('/shipping/charge', function () {
-        return view('backend.shippingCharge');
-    });
+   
+    Route::get('/shipping/charge', [shippingController::class, "index"])->name('shipping');
+
+    // Add shipping
+    Route::get('/shipping/add', [shippingController::class, 'addshipping'])->name('addshipping');
+
+    // Store shipping
+    Route::post('/shipping/store', [shippingController::class, "storeshipping"])->name('storeshipping');
+
+    // Edit shipping
+    Route::get('/shipping/edit/{id}', [shippingController::class, 'editshipping'])->name('editshipping');
+
+    // update shipping 
+    Route::post('/shipping/update/{id}', [shippingController::class, 'updateshipping'])->name('updateshipping');
+
+    // Change Status
+    Route::post('/shipping/allowcod/{id}', [shippingController::class, 'change_allowcod'])->name('change_allowcod');
 
     // Shipping Providers View
 
