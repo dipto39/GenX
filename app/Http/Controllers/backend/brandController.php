@@ -64,7 +64,7 @@ class brandController extends Controller
     {
         $urll = '/admin/brands/update/' . $id;
         $btn = 'Update Brand';
-        $bvalue = brand::get()->all();
+        $bvalue = brand::find($id);
         $data = compact('urll', 'btn', 'bvalue');
         return view("backend.addbrand")->with($data);
     }

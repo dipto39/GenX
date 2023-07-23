@@ -39,11 +39,9 @@
                     </a>
                     <ul class="sub_links ml-10 hidden">
                         <li class="text-[12px] py-2"><a class="{{ request()->is('admin/sliders*') ? 'active' : '' }} hover:text-white" href="{{url('/admin/sliders')}}">Sliders</a></li>
-                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="">Feature Brands</a>
                         </li>
-                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="">Categories</a></li>
-                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="">Services</a></li>
-                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="">Banner</a></li>
+                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/topcategory')}}">Categories</a></li>
+                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/services')}}">Services</a></li>
                     </ul>
                 </li>
                 <li>
@@ -57,7 +55,6 @@
                         <li class="text-[12px] py-2"><a class="{{ request()->is('admin/products*') ? 'active' : '' }} hover:text-white" href="{{url('/admin/products')}}">Product List</a></li>
                         <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/units')}}">Units</a></li>
                         <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/attributes')}}">Attributes</a></li>
-                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/tags')}}">Tags</a></li>
                     </ul>
                 </li>
                 <li>
@@ -89,7 +86,7 @@
                     <ul class="sub_links ml-10 hidden">
                         <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/shipping/charge')}}">Shipping Charge</a>
                         </li>
-                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/shipping/providers')}}">Shipping Providers</a>
+                        <li class="text-[12px] py-2"><a class=" hover:text-white" href="{{url('/admin/providers')}}">Shipping Providers</a>
                         </li>
                     </ul>
                 </li>

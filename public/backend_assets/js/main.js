@@ -426,6 +426,166 @@ document.addEventListener('change', function (e) {
           });
     }
   }
+
+// Change provider Status 
+
+if (e.target.classList.contains('provider_change')) {
+  let id = e.target.dataset.attr;
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  if (e.target.checked) {
+    fetch('/admin/provider/status/'+id, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token
+                },
+            method: 'post',
+            credentials: "same-origin",
+            body: JSON.stringify({
+                inactive:id
+            })
+        })
+        .then((Response) => Response.text())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+  } else {
+    var obj = {
+      inactive : id
+
+    }
+    var jsonData = JSON.stringify(obj)
+    fetch('/admin/provider/status/'+id, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token
+                },
+            method: 'post',
+            credentials: "same-origin",
+            body: JSON.stringify({
+                active:id
+            })
+        }).then((Response) => Response.text())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+  }
+}
+// Change Slider Status 
+
+if (e.target.classList.contains('slider_change')) {
+  let id = e.target.dataset.attr;
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  if (e.target.checked) {
+    fetch('/admin/slider/status/'+id, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token
+                },
+            method: 'post',
+            credentials: "same-origin",
+            body: JSON.stringify({
+                inactive:id
+            })
+        })
+        .then((Response) => Response.text())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+  } else {
+    var obj = {
+      inactive : id
+
+    }
+    var jsonData = JSON.stringify(obj)
+    fetch('/admin/slider/status/'+id, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token
+                },
+            method: 'post',
+            credentials: "same-origin",
+            body: JSON.stringify({
+                active:id
+            })
+        }).then((Response) => Response.text())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+  }
+}
+// Change Service Status 
+
+if (e.target.classList.contains('service_change')) {
+  let id = e.target.dataset.attr;
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  if (e.target.checked) {
+    fetch('/admin/service/status/'+id, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token
+                },
+            method: 'post',
+            credentials: "same-origin",
+            body: JSON.stringify({
+                inactive:id
+            })
+        })
+        .then((Response) => Response.text())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+  } else {
+    var obj = {
+      inactive : id
+
+    }
+    var jsonData = JSON.stringify(obj)
+    fetch('/admin/service/status/'+id, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token
+                },
+            method: 'post',
+            credentials: "same-origin",
+            body: JSON.stringify({
+                active:id
+            })
+        }).then((Response) => Response.text())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+  }
+}
 })
 
 

@@ -4,13 +4,16 @@ use App\Http\Controllers\backend\aboutController;
 use App\Http\Controllers\backend\brandController;
 use App\Http\Controllers\backend\categoryController;
 use App\Http\Controllers\backend\couponController;
-use App\Http\Controllers\backend\LoginCheck;
 use App\Http\Controllers\backend\LoginController;
 use App\Http\Controllers\backend\OrderController;
 use App\Http\Controllers\backend\productController;
 use App\Http\Controllers\backend\settingController;
 use App\Http\Controllers\backend\shippingController;
 use App\Http\Controllers\backend\unitController;
+use App\Http\Controllers\backend\ProvidersController;
+use App\Http\Controllers\backend\serviceController;
+use App\Http\Controllers\backend\sliderController;
+use App\Http\Controllers\backend\topcController;
 use App\Http\Middleware\LoginCheck as MiddlewareLoginCheck;
 use App\Models\shipping;
 use Illuminate\Support\Facades\Route;
@@ -78,11 +81,11 @@ Route::get('/admin/logout',[LoginController::class,'logout']);
 Route::group(['prefix' => '/admin','middleware' => 'login'], function () {
 
 
-    Route::get('', function () {
+    Route::get('/', function () {
         return view('backend.dashboard');
     })->name('dashboard');
     Route::get('/dashboard', function () {
-        return view('backend.dashboard')->name('dashboard');
+        return view('backend.dashboard');
     });
 
     // Categories View
@@ -168,9 +171,52 @@ Route::group(['prefix' => '/admin','middleware' => 'login'], function () {
 
     // Sliders View
 
-    Route::get('/sliders', function () {
-        return view('backend.sliders');
-    });
+    Route::get('/sliders', [sliderController::class, "index"])->name('sliders');
+
+    // Add slider
+    Route::get('/slider/add', [sliderController::class, 'addslider'])->name('addslider');
+
+    // Store slider
+    Route::post('/slider/store', [sliderController::class, "storeslider"])->name('storeslider');
+
+    // Edit slider
+    Route::get('/slider/edit/{id}', [sliderController::class, 'editslider'])->name('editslider');
+
+    // update slider 
+    Route::post('/slider/update/{id}', [sliderController::class, 'updateslider'])->name('updateslider');
+
+    // Delete slider
+    Route::get('/slider/delete/{id}', [sliderController::class, 'deleteslider'])->name('deleteslider');
+    // Change Status
+    Route::post('/slider/status/{id}', [sliderController::class, 'change_status'])->name('change_slider_status');
+
+
+    // Top category view
+    Route::get('/topcategory', [topcController::class, "index"])->name('topCategory');
+    Route::post('/topcategory/store', [topcController::class, "storetcategory"])->name('storetopCategory');
+    Route::post('/topcategory/update/{id}', [topcController::class, "updatetcategory"])->name('updatetopCategory');
+
+    // service View
+
+    Route::get('/services', [serviceController::class, "index"])->name('services');
+
+    // Add service
+    Route::get('/service/add', [serviceController::class, 'addservice'])->name('addservice');
+
+    // Store service
+    Route::post('/service/store', [serviceController::class, "storeservice"])->name('storeservice');
+
+    // Edit service
+    Route::get('/service/edit/{id}', [serviceController::class, 'editservice'])->name('editservice');
+
+    // update service 
+    Route::post('/service/update/{id}', [serviceController::class, 'updateservice'])->name('updateservice');
+
+    // Delete service
+    Route::get('/service/delete/{id}', [serviceController::class, 'deleteservice'])->name('deleteservice');
+    // Change Status
+    Route::post('/service/status/{id}', [serviceController::class, 'change_status'])->name('change_service_status');
+
 
     // Products View
 
@@ -221,13 +267,6 @@ Route::group(['prefix' => '/admin','middleware' => 'login'], function () {
     // Delete unit
     Route::get('/unit/delete/{id}', [unitController::class, 'deleteunit'])->name('deleteunit');
 
-
-
-    // Sliders View
-
-    Route::get('/sliders', function () {
-        return view('backend.sliders');
-    });
 
 
     // Coupons View
@@ -293,9 +332,26 @@ Route::group(['prefix' => '/admin','middleware' => 'login'], function () {
 
     // Shipping Providers View
 
-    Route::get('/shipping/providers', function () {
-        return view('backend.shippingProviders');
-    });
+   
+    Route::get('/providers', [ProvidersController::class, "index"])->name('providers');
+
+    // Add provider
+    Route::get('/provider/add', [ProvidersController::class, 'addprovider'])->name('addprovider');
+
+    // Store provider
+    Route::post('/provider/store', [ProvidersController::class, "storeprovider"])->name('storeprovider');
+
+    // Edit provider
+    Route::get('/provider/edit/{id}', [ProvidersController::class, 'editprovider'])->name('editprovider');
+
+    // update provider 
+    Route::post('/provider/update/{id}', [ProvidersController::class, 'updateprovider'])->name('updateprovider');
+
+    // Delete provider
+    Route::get('/provider/delete/{id}', [ProvidersController::class, 'deleteprovider'])->name('deleteprovider');
+    // Change Status
+    Route::post('/provider/status/{id}', [ProvidersController::class, 'change_status'])->name('change_provider_status');
+
 
     // Setting View
 
