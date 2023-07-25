@@ -20,7 +20,7 @@
             <button class="setting_btn text-[14px] p-2 hover:text-blue-400" onclick="openStab(event, 'up_pass')">Password Update</button>
         </div>
         <div id="site_details" class="setting_content">
-            <form action="@if($urll == ""){{url('admin/setting/add')}}@else {{$urll}}  @endif" method="POST" class="text-[14px]" enctype="multipart/form-data"> 
+            <form action="@if($urll == ""){{url('admin/setting/add')}}@else{{$urll}}@endif" method="POST" class="text-[14px]" enctype="multipart/form-data"> 
                 @csrf
                 <div class="grid grid-cols-2 gap-x-6">
                     <div class="form_left flex-1">

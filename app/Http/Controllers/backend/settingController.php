@@ -82,7 +82,6 @@ class settingController extends Controller
                 'currency' => 'required',
                 'symbol' => 'required',
                 'site_url' => 'required',
-                'logo' => 'required',
             ]);
             $table = setting::find($id);
             $table->cn = $req->name;

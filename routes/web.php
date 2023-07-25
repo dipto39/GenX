@@ -14,6 +14,7 @@ use App\Http\Controllers\backend\ProvidersController;
 use App\Http\Controllers\backend\serviceController;
 use App\Http\Controllers\backend\sliderController;
 use App\Http\Controllers\backend\topcController;
+use App\Http\Controllers\frontend\ChartController;
 use App\Http\Controllers\frontend\indexController;
 use App\Http\Controllers\frontend\loginController as FrontendLoginController;
 use App\Http\Controllers\frontend\ProfileController;
@@ -45,16 +46,23 @@ Route::group(['middleware' => 'userLogin'],function(){
    // Login View
         Route::get('/login', [FrontendLoginController::class,'index'])->name('frontend_login');
         Route::post('/login', [FrontendLoginController::class,'loginUser']);
-        
-        // Login Sign-UP
         Route::get('/signup', [FrontendLoginController::class,'signup']);
         Route::post('/signup', [FrontendLoginController::class,'storeUser']);
 });
+
+// show Cart
+Route::get('/cart', [ChartController::class,'index'])->name('cart');
 
 
 Route::group(['middleware' => 'userLogout'],function(){
     // Show Profile 
     Route::get('/profile', [ProfileController::class,'index'])->name('profile');
+    Route::get('/address', [ProfileController::class,'getAddress'])->name('address');
+    Route::get('/address/add', [ProfileController::class,'getAddress'])->name('address');
+    Route::get('/checkout', [ChartController::class,'checkout'])->name('checkout');
+
+
+    // Logout user
     Route::get('/logout', [FrontendLoginController::class,'logout']);
 });
 

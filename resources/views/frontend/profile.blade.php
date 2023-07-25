@@ -38,9 +38,9 @@
                                     <p class="text-[15px] text-ThemeColor">Profile</p>
                                     <span class="order_counter absolute right-0 text-[13px] text-ThemeColor">0</span>
                                 </a></li>
-                                <li class="py-2 relative flex"><a href="" class="flex items-center text-slate-700 hover:text-ThemeColor">
+                                <li class="py-2 relative flex"><a href="{{url('/address')}}" class="flex items-center text-slate-700 hover:text-ThemeColor">
                                     <i class="fa-solid fa-location-dot w-7"></i>
-                                    <p class="text-[15px]">Location</p>
+                                    <p class="text-[15px]">Address</p>
                                     <span class="order_counter absolute right-0 text-[13px]">0</span>
                                 </a></li>
                                 <li class="py-2 relative flex"><a href="{{url('/logout')}}" class="flex items-center text-slate-700 hover:text-ThemeColor">

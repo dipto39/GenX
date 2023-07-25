@@ -691,13 +691,15 @@ a:hover {
     bottom: 0;
     width: 100%;
     padding: 5px 20px;
+   
 }
 
-.fill_cart .fill_footer button {
-    width: 100%;
+.fill_cart .fill_footer a {
+    width: 100% !important;
     text-align: center;
-    padding: 8px 0;
+    padding: 8px 5px;
     border-radius: 10px;
+    display: block;
 }
 
 .fill_cart .chekout {

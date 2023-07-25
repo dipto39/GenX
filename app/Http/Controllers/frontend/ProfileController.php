@@ -13,4 +13,8 @@ class ProfileController extends Controller
     $data = compact('pdata');
     return view('frontend.profile')->with($data);
    }
+   // Showing Address
+   public function getAddress(){
+      return view('frontend.address');
+   }
 }

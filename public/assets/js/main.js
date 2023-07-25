@@ -246,8 +246,8 @@ $('.discounts_section').slick({
 
 function hmc(){
   let products = [];
-  if(localStorage.getItem('products')){
-      products = JSON.parse(localStorage.getItem('products'));
+  if(getCookie('cart')){
+      products = JSON.parse(getCookie('cart'));
   }
   if(products.length == 0){
   }else{
@@ -268,8 +268,8 @@ $('.cart_icon').on("click",(e)=>{
 // show cart items
 function show_cart_item(){
   let products = [];
-  if(localStorage.getItem('products')){
-      products = JSON.parse(localStorage.getItem('products'));
+  if(getCookie('cart')){
+      products = JSON.parse(getCookie('cart'));
   }
   if(products.length == 0){
     // $('.empty_cart').addClass('hidden')
@@ -280,8 +280,9 @@ function show_cart_item(){
     $('.fill_cart').removeClass('hidden');
     let data = `<div class="fill_cart ">
     <div class="fill_body overflow-auto">`;
-
+    var tprice=0;
     products.forEach((e)=>{
+      tprice += Number(e.price) * e.quant
       data +=`<div class="single_item">
       <div class="item_img">
           <img src="${e.image}" alt="${e.image}">
@@ -289,12 +290,12 @@ function show_cart_item(){
       
       <div class="details">
           <a class="pname" href="">${e.pname}</a>
-          <p class="price text-ThemeColor"><span>$</span>${e.price}</p>
+          <p class="price text-ThemeColor"><span>$</span>${Number(e.price) * e.quant}</p>
       </div>
       <div class="action">
-          <button class="increment">+</button>
-          <p>1</p>
-          <button class="decremnet">-</button>
+          <button class="increment" data-pid="${e.productId}">+</button>
+          <p>${e.quant}</p>
+          <button class="decrement" data-pid="${e.productId}">-</button>
       </div>
       <div class="rmcart" data-pid="${e.productId}">
           <i class="fa-regular fa-trash-can"></i>
@@ -304,8 +305,8 @@ function show_cart_item(){
     data += ` </div>
                     
     <div class="fill_footer">
-        <button class="chekout">Chekout Now (<span> $ 100.333</span>)</button>
-        <button class="view_cart">View Cart</button>
+        <a href="/checkout" class="chekout">Chekout Now (<span> $ ${tprice}</span>)</a>
+        <a  href="/cart" class="view_cart">View Cart</a>
     </div>
 
 </div>`
@@ -314,7 +315,39 @@ function show_cart_item(){
 
 }
 
+// increment Cart item
+$(document).on('click','.increment',function(e){
+  var pid = $(e.target).attr('data-pid');
+  let products = [];
+  if(getCookie('cart')){
+      products = JSON.parse(getCookie('cart'));
+  }
+  //Find index of specific object using findIndex method.
+       objIndex = products.findIndex((obj => obj.productId == pid));
 
+  if(products[objIndex].quant >= 1 && products[objIndex].quant < 5){   
+        products[objIndex].quant = Number(products[objIndex].quant)+1;
+        createCookie('cart', JSON.stringify(products));
+        show_cart_item();
+  }
+})
+// decrement Cart item
+$(document).on('click','.decrement',function(e){
+  var pid = $(e.target).attr('data-pid');
+  let products = [];
+  if(getCookie('cart')){
+      products = JSON.parse(getCookie('cart'));
+  }
+  //Find index of specific object using findIndex method.    
+    objIndex = products.findIndex((obj => obj.productId == pid));
+    
+    if(products[objIndex].quant > 1 && products[objIndex].quant <= 5){
+      products[objIndex].quant = Number(products[objIndex].quant)-1;
+      createCookie('cart', JSON.stringify(products));
+      show_cart_item();
+    }
+        
+})
 
 // add to cart product
 
@@ -325,11 +358,11 @@ $(document).on('click','.atoCart', function(e){
  let id = ($(e.target).parent().attr('data-pid'));
  function addProduct(){
   let products = [];
-  if(localStorage.getItem('products')){
-      products = JSON.parse(localStorage.getItem('products'));
+  if(getCookie('cart')){
+      products = JSON.parse(getCookie('cart'));
   }
-  products.push({'productId' :id, "image" : pimg,"price" : price,'pname' :pname});
-  localStorage.setItem('products', JSON.stringify(products));
+  products.push({'productId' :id, "image" : pimg,"price" : price,'pname' :pname,'quant' : 1});
+  createCookie('cart', JSON.stringify(products));
   $('.cart_item').removeClass('hidden')
   $('.cart_item').html(products.length)
 }
@@ -342,12 +375,15 @@ addProduct();
 $(document).on('click','.rmcart', function(e){
   $(e.target).parent().parent().remove();
   let id = ($(e.target).parent().attr('data-pid'));
+
   function removeProduct(productId){
-    let storageProducts = JSON.parse(localStorage.getItem('products'));
+    let storageProducts = JSON.parse(getCookie('cart'));
     let products = storageProducts.filter(product => product.productId !== productId );
-    localStorage.setItem('products', JSON.stringify(products));
+    createCookie('cart', JSON.stringify(products));
+  
 }
 removeProduct(id);
+show_cart_item()
  }
  );
 
@@ -393,4 +429,130 @@ for (i = 0; i < acc.length; i++) {
       panel.style.display = "block";
     }
   });
+}
+
+// Show all cart in cart Route
+
+function showAllcart(){
+  let products = [];
+  if(getCookie('cart')){
+      products = JSON.parse(getCookie('cart'));
+  }
+  if(products.length == 0){
+    $('.all_cart_items').html('<h2 class="text-center text-red-500">No Item Found</h2>');
+  }else{
+    
+    var data =`<div class="">
+    <div class="flex justify-center items-center py-5">
+        <button class="bg-ThemeColor text-white font-semibold py-2 px-5 rounded-3xl"> 1. Cart</button>
+    <span class="w-10 bg-ThemeColor h-1"></span>
+    <button class="bg-pink-200 text-ThemeColor font-semibold py-2 px-5 rounded-3xl relative">1. Details</button>
+    <span class="w-10 bg-pink-200 h-1"></span>
+    <button class="bg-pink-200 text-ThemeColor font-semibold py-2 px-5 rounded-3xl relative">1. Payment</button>
+    </div>
+    <div class="py-4 flex">
+        <div class="basis-4/5 me-4 rounded-md">`;
+        var tprice=0;
+      products.forEach(e => {
+        tprice += Number(e.price) * e.quant
+        data+=`   <div class="single_item flex justify-between items-center bg-white p-2 mb-5">
+        <div class="item_img">
+            <img class="h-32" src="${e.image}" alt="">
+        </div>
+        
+        <div class="details">
+            <a class="pname" href="">${e.pname}</a>
+            <div class="flex">
+                <p class="price text-ThemeColor"><span>$</span>${Number(e.price) * e.quant}</p>
+                <p class="price text-gray-400 ml-5"><span>$</span>${e.price}<span>x</span> ${e.quatn}</p>
+            </div>
+        </div>
+        <div class="action flex flex-col justify-center items-center">
+            <button class="maincincrement text-lg border px-2" data-pid="${e.productId}">+</button>
+            <p>${e.quant}</p>
+            <button class="maincdecrement text-lg border px-2" data-pid="${e.productId}">-</button>
+        </div>
+        <div class="rmcart" data-pid="${e.productId}">
+            <i class="fa-regular fa-trash-can"></i>
+        </div>
+    </div>`
+      });
+         
+           
+       data+=` </div>
+        <div class="basis-1/5">
+            <div class="rounded-md bg-white p-4 ">
+                <h1 class="front-lg float-right mb-5">AED ${tprice}</h1>
+                <br>
+                <a href="/checkout" class="bg-ThemeColor text-center text-white w-full py-2 block">Chekout Now</a>
+            </div>
+        </div>
+    </div>
+</div>`;
+$('.all_cart_items').html(data)
+  }
+}
+showAllcart()
+// Main increment Cart item
+$(document).on('click','.maincincrement',function(e){
+  var pid = $(e.target).attr('data-pid');
+  let products = [];
+  if(getCookie('cart')){
+      products = JSON.parse(getCookie('cart'));
+  }
+  //Find index of specific object using findIndex method.
+       objIndex = products.findIndex((obj => obj.productId == pid));
+
+  if(products[objIndex].quant >= 1 && products[objIndex].quant < 5){   
+        products[objIndex].quant = Number(products[objIndex].quant)+1;
+        createCookie('cart', JSON.stringify(products));
+        showAllcart()
+  }
+})
+// Main decrement Cart item
+$(document).on('click','.maincdecrement',function(e){
+  var pid = $(e.target).attr('data-pid');
+  let products = [];
+  if(getCookie('cart')){
+      products = JSON.parse(getCookie('cart'));
+  }
+  //Find index of specific object using findIndex method.    
+    objIndex = products.findIndex((obj => obj.productId == pid));
+    
+    if(products[objIndex].quant > 1 && products[objIndex].quant <= 5){
+      products[objIndex].quant = Number(products[objIndex].quant)-1;
+      createCookie('cart', JSON.stringify(products));
+      showAllcart()
+    }
+        
+})
+
+// Cookie Herper Function 
+
+function createCookie(name, value, days) {
+  var expires;
+  if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toGMTString();
+  }
+  else {
+      expires = "";
+  }
+  document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function getCookie(c_name) {
+  if (document.cookie.length > 0) {
+      c_start = document.cookie.indexOf(c_name + "=");
+      if (c_start != -1) {
+          c_start = c_start + c_name.length + 1;
+          c_end = document.cookie.indexOf(";", c_start);
+          if (c_end == -1) {
+              c_end = document.cookie.length;
+          }
+          return unescape(document.cookie.substring(c_start, c_end));
+      }
+  }
+  return "";
 }
