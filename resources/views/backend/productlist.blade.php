@@ -112,11 +112,23 @@
             
                         </td>
                         <td class="p-4">
-                            @foreach ($category as $item2)
+                            @if (is_numeric($item['ct']))
+                                @foreach ($category as $item2)
                             @if ($item2['id'] == $item['ct'])
                                 {{$item2['cname']}}                                
                             @endif
                             @endforeach
+                            @else
+                            @php
+                                $sid=substr($item['ct'],2)
+                            @endphp
+                            @foreach ($subcategory as $item2)
+                            @if ($item2['sid'] == $sid)
+                                {{$item2['subcname']}}                                
+                            @endif
+                            @endforeach
+                            @endif
+                            
                         </td>
                         <td class="p-4">
                             {{$item['price']}}

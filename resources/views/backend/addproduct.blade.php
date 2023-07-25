@@ -59,6 +59,11 @@
                                         selected
                                     @endif
                                 @endif>{{$item['cname']}}</option>
+                                @foreach ($subcategory as $item2)
+                                    @if ($item2['cid'] == $item['id'])
+                                    <option value="s-{{$item2['sid']}}">--{{$item2['subcname']}}</option>
+                                    @endif
+                                @endforeach
                                 @endforeach
                                 
                             </select>

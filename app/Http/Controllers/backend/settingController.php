@@ -99,7 +99,7 @@ class settingController extends Controller
             $table->cs = $req->symbol;
             $table->sc = $req->Charge;
             $table->vat = $req->vat;
-            $table->su = $req->Stie_url;
+            $table->su = $req->site_url;
             if (!file_exists(public_path('assets/logo'))) {
                 mkdir(public_path('assets/logo'), 0777, true);
             }
@@ -115,7 +115,7 @@ class settingController extends Controller
                 $table['logo'] = 'assets/logo/' . $imagename;
             }
             $table->update();
-            return view('setting');
+            return redirect()->route('setting');
         }
 
         // update password

@@ -16,7 +16,7 @@
             </div>
             <div class="cart_body ">
                 <div class="empty_cart text-center">
-                    <img src="./assets/icon/shopping-bag.svg" alt="">
+                    <img src="{{asset('')}}./assets/icon/shopping-bag.svg" alt="">
                     <p class="d">Your shopping bag is empty. Start shopping</p>
                 </div>
 
@@ -27,38 +27,6 @@
     </div>
     <!-- cart section end -->
 
-    <!-- login section start  -->
-
-    <dialog id="login_modal" class="modal p-16">
-        <form method="dialog" class="modal-box">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-            <div class="login_box">
-                <div class="login_box w-full text-slate-800">
-                    <h3 class="text-center text-[16px]">Welcome To Genx</h3>
-                    <p class="text-center py-2 text-[14px]">Login with email & password</p>
-                    <p class="text-red-500 hidden">There is an error</p>
-                    <form action="">
-                        <label for="email w-100">
-                            Email
-                            <input class="w-full my-2 p-2 border outline-ThemeColor" type="email"
-                                placeholder="example@mail.com">
-                        </label>
-                        <label for="email">
-                            Password
-                            <input class="w-full my-2 p-2 border outline-ThemeColor" type="email" placeholder="******">
-                        </label>
-                        <button type="submit" class="w-full my-2 p-2 bg-ThemeColor text-white">Login</button>
-                    </form>
-
-                    <p class="text-center text-gray-400 py-2">Don't have account? <a href=""
-                            class="text-black font-bold">Sign Up</a> </p>
-                </div>
-            </div>
-        </form>
-    </dialog>
-
-    <!-- login section end -->
-
     <!-- topbar section start -->
 
     <div class="topbar p-2 bg-topbar">
@@ -66,21 +34,27 @@
             <div class="topbar_left flex">
                 <div class="contact_no flex items-center mr-4 hidden lg:block">
                     <span class="icon mr-2"><i class="fa-solid fa-phone"></i></span>
-                    <span class="number">+071 04 342 5068</span>
+                    <span class="number">@isset($setting)
+                        {{$setting[0]['pp']}}
+                    @endisset</span>
                 </div>
                 <div class="contact_mail flex items-center hidden lg:block">
                     <span class="icon mr-2"><i class="fa-regular fa-envelope"></i></span>
-                    <span class="mail">genx@gmail.com</span>
+                    <span class="mail">@isset($setting)
+                        {{$setting[0]['pe']}}
+                    @endisset</span>
                 </div>
                 <div class="logo lg:hidden">
-                    <a href=""><img src="./assets/logo/logo.png" alt="genx logo"></a>
+                    <a href="{{url('/')}}"><img src="@isset($setting)
+                        {{asset($setting[0]['logo'])}}
+                    @endisset" alt="genx logo"></a>
                 </div>
             </div>
             <div class="topbar_right flex items-center">
                 <a href="">Contact Us ?</a>
                 <div class="lang mx-5 flex items-center cursor-pointer relative">
                     <div class="lang_icon">
-                        <img src="./assets/img/flags/usa.png" alt="flags">
+                        <img src="{{asset('/assets/img/flags/usa.png')}}" alt="flags">
                     </div>
                     <div class="lang_name ms-2 me-1">
                         <span class="font-bold">EN</span>
@@ -89,7 +63,7 @@
                     <div class="lang_area shadow-lg hidden">
                         <div class="single_lang p-1 bg-white mb-1 flex items-center cursor-pointer">
                             <div class="lang_icon">
-                                <img src="./assets/img/flags/usa.png" alt="flags">
+                                <img src="{{asset('/assets/img/flags/usa.png')}}" alt="flags">
                             </div>
                             <div class="lang_name ms-2 me-1">
                                 <span class="font-bold">EN</span>
@@ -100,7 +74,7 @@
                 </div>
                 <div class="currency flex items-center cursor-pointer relative">
                     <div class="currency_icon">
-                        <img src="./assets/img/flags/aed.png" alt="flags">
+                        <img src="{{asset('/assets/img/flags/aed.png')}}" alt="flags">
                     </div>
                     <div class="currency_name ms-2 me-1">
                         <span class="font-bold">AED</span>
@@ -109,7 +83,7 @@
                     <div class="currency_area shadow-lg hidden">
                         <div class="single_currency p-1 bg-white mb-1 flex items-center cursor-pointer">
                             <div class="currency_icon">
-                                <img src="./assets/img/flags/aed.png" alt="flags">
+                                <img src="{{asset('/assets/img/flags/aed.png')}}" alt="flags">
                             </div>
                             <div class="currency_name ms-2 me-1">
                                 <span class="font-bold">AED</span>
@@ -123,13 +97,13 @@
     </div>
 
     <!-- topbar section end -->
-
     <!-- Top navbar section start  -->
-
     <div class="top_nav sticky top-0 z-50  bg-white px-10 lg:px-0">
         <div class="container flex  items-center py-4 relative">
             <div class="logo me-16 hidden lg:block">
-                <a href=""><img src="./assets/logo/logo.png" alt="genx logo"></a>
+                <a href="{{url('/')}}"><img src="@isset($setting)
+                    {{asset($setting[0]['logo'])}}
+                @endisset" alt="genx logo"></a>
             </div>
             <div class=" cursor-pointer bg-slate-50 text-gray-500 catebtn hidden ">
                 <div class="categoryicon">
@@ -143,170 +117,54 @@
                     <i class=" dropicon text-gray fa-solid fa-sort-down mb-5"></i>
                 </div>
                 <div class="categories eventcate shadow-md hidden">
-                    <div onmouseover="opentab(event, 'electornic')"
-                        class="singlecate flex items-center justify-between px-3 py-2 tablink ">
-                        <div class="category_icon flex items-center ">
-                            <img src="./assets/img/product-icon/ram.png" alt="Electornic component">
-                            <div class="category_name ms-2">
-                                <span>Electronic</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                    <div class="tabcontent shadow-md" id="electornic">
-                        <div class="subcategory ">
-                            <li><a href="">Deel monitor</a></li>
-                        </div>
-                    </div>
-                    <div onmouseover="opentab(event, 'cooling')"
-                        class="singlecate flex items-center justify-between px-3 py-2 tablink">
-                        <div class="category_icon flex items-center ">
-                            <img src="./assets/img/product-icon/fan.png" alt="Electornic component">
-                            <div class="category_name ms-2">
-                                <span>Fans & Cooling</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                    <div class="tabcontent shadow-md" id="cooling">
+                    @if (count($categories) > 0)
+                         @foreach ($categories as $item)
+                         <a href="{{ url('/category/'.str_replace(' ','_',$item['cname'])) }}" onmouseover="opentab(event, '{{ str_replace(' ','_',$item['cname'])}}')"
+                         class="singlecate flex items-center justify-between px-3 py-2 tablink ">
+                         <div class="category_icon flex items-center ">
+                             <img src="{{asset($item['cimg'])}}" alt="{{$item['cname']}}">
+                             <div class="category_name ms-2">
+                                 <span>{{$item['cname']}}</span>
+                             </div>
+                         </div>
+                         <i class="fa-solid fa-angle-right"></i>
+                        </a>
+                     <div class="tabcontent shadow-md" id="{{ str_replace(' ','_',$item['cname'])}}">
                         <div class="subcategory ">
                             <div class="subcategory1">
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
+                            @foreach ($Subcategories as $item2)
+                             @if ($item2['cid'] == $item['id'])
+                                  <li><a href="{{url('/category/'.str_replace(' ','_',$item['subcname']))}}">{{$item2['subcname']}}</a></li>
+                             @endif
+                                 
+                             @endforeach
+                            </div>
+                            
                             </div>
                         </div>
-                    </div>
-                    <div onmouseover="opentab(event, 'accessories')"
-                        class="singlecate flex items-center justify-between px-3 py-2 tablink">
-                        <div class="category_icon flex items-center ">
-                            <img src="./assets/img/product-icon/computer.png" alt="Electornic component">
-                            <div class="category_name ms-2">
-                                <span>Computer Accessories</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                    <div class="tabcontent shadow-md" id="accessories">
-                        <div class="subcategory">
-                            <div class="subcategory1">
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                            </div>
-
-                            <div class="subcategory2">
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                            </div>
-
-                            <div class="subcategory3">
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                            </div>
-
-                            <div class="subcategory4">
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                                <li><a href="">Deel monitor</a></li>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="singlecate flex items-center justify-between px-3 py-2 tablink">
-                        <div class="category_icon flex items-center ">
-                            <img src="./assets/img/product-icon/hardware.png" alt="Electornic component">
-                            <div class="category_name ms-2">
-                                <span>Computer Hardware</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                    <div class="singlecate flex items-center justify-between px-3 py-2 tablink">
-                        <div class="category_icon flex items-center ">
-                            <img src="./assets/img/product-icon/cable.png" alt="Electornic component">
-                            <div class="category_name ms-2">
-                                <span>Cables</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                    <div class="singlecate flex items-center justify-between px-3 py-2 tablink">
-                        <div class="category_icon flex items-center ">
-                            <img src="./assets/img/product-icon/laptop.png" alt="Electornic component">
-                            <div class="category_name ms-2">
-                                <span>Laptops</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                    <div class="singlecate flex items-center justify-between px-3 py-2 tablink">
-                        <div class="category_icon flex items-center ">
-                            <img src="./assets/img/product-icon/desktop-ram.png" alt="Electornic component">
-                            <div class="category_name ms-2">
-                                <span>Desktop Memory</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                    <div class="singlecate flex items-center justify-between px-3 py-2 tablink">
-                        <div class="category_icon flex items-center ">
-                            <img src="./assets/img/product-icon/mouse.png" alt="Electornic component">
-                            <div class="category_name ms-2">
-                                <span>Mouse</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                    <div class="singlecate flex items-center justify-between px-3 py-2 tablink">
-                        <div class="category_icon flex items-center ">
-                            <img src="./assets/img/product-icon/combo.png" alt="Electornic component">
-                            <div class="category_name ms-2">
-                                <span>Combo sets</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
-                    <div class="singlecate flex items-center justify-between px-3 py-2 tablink">
-                        <div class="category_icon flex items-center ">
-                            <img src="./assets/img/product-icon/grid.png" alt="Electornic component">
-                            <div class="category_name ms-2">
-                                <span>all categories</span>
-                            </div>
-                        </div>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </div>
+                    @endforeach
+                    @endif                  
 
                 </div>
             </div>
             <div class="search_box flex-1 mx-16">
-                <div class="input-group flex relative text-[14px]">
+            
+            <form action="{{url('/search/')}}" method="get">
+                  <div class="input-group flex relative text-[14px]">
                     <i class="fa-solid fa-magnifying-glass text-gray-400 absolute top-4 left-5"></i>
-                    <input type="text" placeholder="Search…" class="w-full py-3 ps-14 border rounded-3xl outline-ThemeColor" />
-                    <button class="hidden lg:hidden absolute right-0 py-3 px-5 text-gray-400 border-l border-gray-300">search</button>
+                    <input type="text" name="search" placeholder="Search…" class="w-full py-3 ps-14 border rounded-3xl outline-ThemeColor" />
+                    <button class="hidden lg:block absolute right-0 py-3 px-5 text-gray-400 border-l border-gray-300" type="submit">search</button>
                 </div>
+            </form>
+              
             </div>
             <div class="cartAndAcc flex ml-auto ">
                 <div class="menuicon text-ThemeColor cursor-pointer text-2xl lg:hidden">
                     <i class="fa-solid fa-bars"></i>
                 </div>
-                <div class="user_img mr-5  hidden lg:block" onclick="login_modal.showModal()">
+                <a href="@if(session()->get('uid')) {{url('/profile')}} @else {{url('/login')}} @endif" class="user_img mr-5  hidden lg:block">
+                    @if(session()->get('pp') == null)
+                    
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none"
                         class="injected-svg" data-src="/assets/images/icons/user.svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -314,8 +172,10 @@
                             d="M15.9441 9.62492C15.9441 10.2953 15.6778 10.9383 15.2037 11.4123C14.7297 11.8864 14.0868 12.1527 13.4163 12.1527C12.7459 12.1527 12.103 11.8864 11.6289 11.4123C11.1549 10.9383 10.8886 10.2953 10.8886 9.62492C10.8886 8.95451 11.1549 8.31156 11.6289 7.83751C12.103 7.36346 12.7459 7.09714 13.4163 7.09714C14.0868 7.09714 14.7297 7.36346 15.2037 7.83751C15.6778 8.31156 15.9441 8.95451 15.9441 9.62492ZM13.4163 13.4166C14.422 13.4166 15.3864 13.0171 16.0975 12.306C16.8085 11.595 17.208 10.6305 17.208 9.62492C17.208 8.61931 16.8085 7.65488 16.0975 6.94381C15.3864 6.23273 14.422 5.83325 13.4163 5.83325C12.4107 5.83325 11.4463 6.23273 10.7352 6.94381C10.0242 7.65488 9.62467 8.61931 9.62467 9.62492C9.62467 10.6305 10.0242 11.595 10.7352 12.306C11.4463 13.0171 12.4107 13.4166 13.4163 13.4166ZM20.9997 19.736C20.9997 20.9999 19.7358 20.9999 19.7358 20.9999H7.0969C7.0969 20.9999 5.83301 20.9999 5.83301 19.736C5.83301 18.4721 7.0969 14.6805 13.4163 14.6805C19.7358 14.6805 20.9997 18.4721 20.9997 19.736ZM19.7358 19.731C19.7345 19.4201 19.5411 18.4848 18.6842 17.6279C17.8602 16.8038 16.3094 15.9444 13.4163 15.9444C10.522 15.9444 8.97251 16.8038 8.14845 17.6279C7.29154 18.4848 7.09942 19.4201 7.0969 19.731H19.7358Z"
                             fill="#4B566B"></path>
                     </svg>
-                    <img class="hidden" src="./assets/img/user/user.jpeg" alt="User image">
-                </div>
+                     @else 
+                    <img class="" src="{{ asset(session()->get('pp'))}}" width="28" height="28" src="" alt="User image">
+                    @endif
+                </a>
                 <div class="cart_icon relative hidden lg:block">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none"
                         class="injected-svg" data-src="/assets/images/icons/bag.svg"

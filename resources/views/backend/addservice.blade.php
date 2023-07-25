@@ -28,8 +28,8 @@
                     <label for="">
                         Icon
                         <div
-                            class="image_input h-28 w-28 bg-slate-200 mt-2 flex justify-center items-center cursor-pointer">
-                            <input class="hidden" type="file" name="service_img" id="prev_input_img">
+                            class="image_input prev_box h-28 w-28 bg-slate-200 mt-2 flex justify-center items-center cursor-pointer">
+                            <input class="hidden img_input" type="file" name="service_img" id="prev_input_img">
                             <span class="plus_icon ">+</span>
                             <img class="prev_img  z-10"
                                 src="@if(isset($svalue)) {{asset($svalue['img'])}} @endif" alt="">

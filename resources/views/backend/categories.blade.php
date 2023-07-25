@@ -23,16 +23,16 @@
             @if (count($categories) > 0)
                 @foreach ($categories as $item)
                     <div
-                        class="maincata @foreach ($subcategories as $item2) @if ($item['id'] === $item2['cid']) have_sub @endif @endforeach flex items-center p-4 bg-slate-100 relative">
+                        class="maincata @foreach ($subcategories as $item2) @if ($item['id'] == $item2['cid'])  have_sub  @break @endif @endforeach flex items-center p-4 bg-slate-100 relative">
                         <div class="cimg mr-4">
                             <img class="h-8" src="{{ asset($item['cimg']) }}" alt="icon">
                         </div>
                         <h3 class="text-[20px] text-slate-600">{{ $item['cname'] }}</h3>
                         <span
-                            class="down_icon @foreach ($subcategories as $item2) @if ($item['id'] === $item2['cid']) @else hidden @endif @endforeach"><i
+                            class="down_icon @foreach ($subcategories as $item2) @if (!$item['id'] === $item2['cid']) hidden  @endif @endforeach"> <i
                                 class="fa-solid fa-chevron-down"></i></span>
                         <span
-                            class="trush_icon @foreach ($subcategories as $item2) @if ($item['id'] === $item2['cid']) hidden @endif @endforeach"><a
+                            class="trush_icon @foreach ($subcategories as $item2) @if ($item['id'] === $item2['cid']) hidden  @break @endif @endforeach"><a
                                 href="{{url('/admin/categories/delete/'.$item['id'])}}"> <i class="fa-solid fa-trash-can"></i></a></span>
                         <span class="edit_icon"><a href="{{url('admin/categories/edit/'.$item['id'])}}"><i class="fa-regular fa-pen-to-square"></i></a></span>
                     </div>

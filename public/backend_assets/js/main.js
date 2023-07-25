@@ -113,6 +113,7 @@ prevbox.forEach((e)=>{
   })
 })
 img_inputs.forEach((e)=>{
+  
   e.addEventListener('change',function(e){
     const [file] =e.target.files;
     if(file){

@@ -1,5 +1,7 @@
 @extends('frontend.layouts.main')
-
+@push('title')
+<title>GENX || Brands</title>
+@endpush
 @section('content')
         <!-- Brand section start  -->
         <div class="brand_section bg-themebg">
@@ -28,6 +30,5 @@
                 </div>
             </div>
         </div>
-        
         <!-- Brand section end -->
 @endsection

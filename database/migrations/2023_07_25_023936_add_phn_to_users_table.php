@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->integer('flash')->default(0);
-            $table->integer('new')->default(1);
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('phn')->nullable();
+            $table->string('pp')->nullable();
         });
     }
 
@@ -22,9 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('flash');
-            $table->dropColumn('new');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('phn');
+            $table->dropColumn('pp');
         });
     }
 };

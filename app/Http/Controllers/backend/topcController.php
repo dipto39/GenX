@@ -17,7 +17,7 @@ class topcController extends Controller
              $topcategory = tcata::get()->all();
              $categories=category::get()->all();
              if(count($topcategory) > 0){ 
-                $urll = '/admin/topcategory/update'.$topcategory[0]['id'];
+                $urll = '/admin/topcategory/update/'.$topcategory[0]['id'];
                 $data = compact('urll','topcategory','categories');
                  return view('backend.topcategory')->with($data);
              }else{

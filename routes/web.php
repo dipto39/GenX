@@ -14,6 +14,9 @@ use App\Http\Controllers\backend\ProvidersController;
 use App\Http\Controllers\backend\serviceController;
 use App\Http\Controllers\backend\sliderController;
 use App\Http\Controllers\backend\topcController;
+use App\Http\Controllers\frontend\indexController;
+use App\Http\Controllers\frontend\loginController as FrontendLoginController;
+use App\Http\Controllers\frontend\ProfileController;
 use App\Http\Middleware\LoginCheck as MiddlewareLoginCheck;
 use App\Models\shipping;
 use Illuminate\Support\Facades\Route;
@@ -34,9 +37,28 @@ use PhpParser\Node\Expr\FuncCall;
 
 // Index view
 
-Route::get('/', function () {
-    return view('frontend.index');
+Route::get('/', [indexController::class,'index']);
+// search
+Route::get('/search', [indexController::class,'gotosearch']);
+
+Route::group(['middleware' => 'userLogin'],function(){
+   // Login View
+        Route::get('/login', [FrontendLoginController::class,'index'])->name('frontend_login');
+        Route::post('/login', [FrontendLoginController::class,'loginUser']);
+        
+        // Login Sign-UP
+        Route::get('/signup', [FrontendLoginController::class,'signup']);
+        Route::post('/signup', [FrontendLoginController::class,'storeUser']);
 });
+
+
+Route::group(['middleware' => 'userLogout'],function(){
+    // Show Profile 
+    Route::get('/profile', [ProfileController::class,'index'])->name('profile');
+    Route::get('/logout', [FrontendLoginController::class,'logout']);
+});
+
+
 
 // Brand View
 

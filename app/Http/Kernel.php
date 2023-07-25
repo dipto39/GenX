@@ -49,7 +49,12 @@ class Kernel extends HttpKernel
         ],
         'logout' => [
             \App\Http\Middleware\Logout::class
-    
+        ],
+        'userLogin' => [
+            \App\Http\Middleware\UserLoginCheck::class
+        ],
+        'userLogout' => [
+            \App\Http\Middleware\UserLogout::class
             ]
     ];
 

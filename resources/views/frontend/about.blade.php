@@ -1,5 +1,7 @@
 @extends('frontend.layouts.main')
-
+@push('title')
+<title>GENX || About GENX</title>
+@endpush
 @section('content')
         <!-- About us section start  -->
         <div class="aboutus_section bg-themebg py-7">

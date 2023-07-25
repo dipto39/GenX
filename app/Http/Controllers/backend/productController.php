@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\brand;
 use App\Models\category;
 use App\Models\product;
+use App\Models\Subcategories;
 use App\Models\unit;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
@@ -21,8 +22,9 @@ class productController extends Controller
         $products = product::paginate(15);
         $brands = brand::get()->all();
         $category = category::get()->all();
+        $subcategory = Subcategories::get()->all();
         $unit = unit::get()->all();
-        $data = compact('products', 'brands', 'category', 'unit');
+        $data = compact('products', 'brands', 'category', 'unit','subcategory');
         return view('backend.productlist')->with($data);
     }
 
@@ -32,10 +34,11 @@ class productController extends Controller
     {
         $brands = brand::get()->all();
         $category = category::get()->all();
+        $subcategory = Subcategories::get()->all();
         $unit = unit::get()->all();
         $urll = '/admin/product/store';
         $btn = 'Add product';
-        $data = compact('urll', 'btn', 'brands', 'category', 'unit');
+        $data = compact('urll', 'btn', 'brands', 'category', 'unit','subcategory');
         return view("backend.addproduct")->with($data);
     }
 
@@ -43,10 +46,11 @@ class productController extends Controller
 
     public function storeproduct(Request $req)
     {
+
         $req->validate([
             'name' => "required",
             'brand' => "required|numeric",
-            'category' => "required|numeric",
+            'category' => "required",
             'brand' => "required|numeric",
             'stock_quantity' => "required|numeric",
             'description' => "required",
@@ -145,10 +149,11 @@ class productController extends Controller
         $value = product::find($id);
         $brands = brand::get()->all();
         $category = category::get()->all();
+        $subcategory = Subcategories::get()->all();
         $unit = unit::get()->all();
         $urll = '/admin/product/update/' . $id;
         $btn = 'Update product';
-        $data = compact('urll', 'btn', 'brands', 'category', 'unit', 'value');
+        $data = compact('urll', 'btn', 'brands', 'category', 'unit', 'value','subcategory');
         return view("backend.addproduct")->with($data);
     }
 
@@ -159,7 +164,7 @@ class productController extends Controller
         $req->validate([
             'name' => "required",
             'brand' => "required|numeric",
-            'category' => "required|numeric",
+            'category' => "required",
             'brand' => "required|numeric",
             'stock_quantity' => "required|numeric",
             'description' => "required",

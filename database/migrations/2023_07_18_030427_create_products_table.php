@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('sku')->nullable(true);
             $table->string('model')->nullable(true);
             $table->integer('brand');
-            $table->integer('ct');
+            $table->string('ct');
             $table->integer('unit')->nullable((true));
             $table->integer('uq')->nullable(true);
             $table->integer('sq');
@@ -32,6 +32,8 @@ return new class extends Migration
             $table->integer('status')->default(1);
             $table->string('pimg');
             $table->string('ptham')->nullable(true);
+            $table->integer('flash')->default(0);
+            $table->integer('new')->default(1);
             $table->string('g1')->nullable(true);
             $table->string('g2')->nullable(true);
             $table->string('g3')->nullable(true);
