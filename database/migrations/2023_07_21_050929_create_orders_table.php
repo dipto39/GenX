@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('orid')->default(uniqid());
             $table->integer('uid');
-            $table->integer('pid');
-            $table->integer('quant');
+            $table->string('pid');
             $table->integer('pm');
-            $table->string('pmid');
+            $table->string('pmid')->nullable();
             $table->string('cu')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();

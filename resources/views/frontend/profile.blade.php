@@ -3,8 +3,7 @@
 <title>{{session()->get('name')}} || Genx Profile</title>
 @endpush
 @section('content')
-{{session()->get('uid')}}
-    <!-- profile secton start  -->
+    <!-- profile section start  -->
     <div class="profile_sction bg-themebg py-7">
         <div class="container">
             <div class="block lg:flex">
@@ -252,5 +251,5 @@
         </div>
         
     </div>
-        <!-- profile secton end -->
+    <!-- profile section end -->
 @endsection

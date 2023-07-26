@@ -13,11 +13,20 @@ return new class extends Migration
     {
         Schema::create('orderdetails', function (Blueprint $table) {
             $table->id();
-            $table->integer('oid');
-            $table->string('phone');
+            $table->string('oid');
+            $table->string('phn');
+            $table->string('name');
             $table->integer('cid');
+            $table->string('state');
+            $table->string('zip');
+            $table->integer('sipro');
+            $table->date('pdate')->nullable();
+            $table->time('ptime')->nullable();
+            $table->integer('tex');
+            $table->integer('charge');
+            $table->integer('discount')->default(0);
+            $table->integer('subt');
             $table->longText('address');
-            $table->integer('spm')->nullable();
             $table->timestamps();
         });
     }

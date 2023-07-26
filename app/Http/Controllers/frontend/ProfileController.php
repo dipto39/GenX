@@ -17,4 +17,8 @@ class ProfileController extends Controller
    public function getAddress(){
       return view('frontend.address');
    }
+   // get orders 
+   public function orders(){
+      return view('frontend.orders');
+   }
 }

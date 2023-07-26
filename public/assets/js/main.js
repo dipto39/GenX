@@ -102,6 +102,14 @@ function openCategory(evt, categoryName) {
   evt.currentTarget.className += " active";
 }
 
+// Show Payment method
+$(document).on('click','.ptop',function(e){
+  e.preventDefault()
+  $('.payment_option').show();
+   $('.ptop').hide();
+
+})
+
 
 // hide tabcontent 
 
@@ -556,3 +564,98 @@ function getCookie(c_name) {
   }
   return "";
 }
+
+
+// Change Shipped country
+
+$(document).on('change','.shipped_country',function(e){
+  var id = this.value
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  fetch('/getShippingCarge/'+id, {
+          headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json, text-plain, */*",
+              "X-Requested-With": "XMLHttpRequest",
+              "X-CSRF-TOKEN": token
+              },
+          method: 'post',
+          credentials: "same-origin",
+          body: JSON.stringify({
+              id : id,
+              
+          })
+      })
+      .then((Response) => Response.text())
+      .then((data) => {
+      document.querySelector('.dynamic_subtotal').innerHTML =data
+      })
+      .catch(function(error) {
+          console.log(error);
+      });
+      fetch('/getPaymetMethod/'+id, {
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text-plain, */*",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-TOKEN": token
+            },
+        method: 'post',
+        credentials: "same-origin",
+        body: JSON.stringify({
+            id : id,
+            
+        })
+    })
+    .then((Response) => Response.text())
+    .then((data) => {
+    document.querySelector('.payment_method_section').innerHTML =data
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+})
+
+// add to cart in single page
+
+$(document).on('click','.atoMainCart', function(e){
+  let price = ($(e.target).parent().find('.price h3 b').html());
+  let pname = ($(e.target).parent().find('.pname p').text());
+  let pimg = ($(e.target).parent().parent().find('.pimg img').attr('src'));
+  let cc = ($(e.target).parent().find('.quant_en').text());
+  let count = Number(cc);
+  let id = ($(e.target).attr('data-pid'));
+  function addProduct(){
+   let products = [];
+   if(getCookie('cart')){
+       products = JSON.parse(getCookie('cart'));
+   }
+   products.push({'productId' :id, "image" : pimg,"price" : price,'pname' :pname,'quant' : count});
+   createCookie('cart', JSON.stringify(products));
+   $('.cart_item').removeClass('hidden')
+   $('.cart_item').html(products.length);
+   $('.atoMainCart').html('Product In You Cart');
+   $('.atoMainCart').attr("disabled", true)
+ }
+ addProduct();
+ }
+ );
+
+ // single page counter 
+ $(document).on('click','.single_increment',function(){
+    var val = Number($('.quant_en').text())
+    if(val >= 1 && val < 5){
+      val++;
+    }
+    $('.quant_en').html(val);
+ })
+  // single page counter 
+  $(document).on('click','.single_decrement',function(){
+    var val = Number($('.quant_en').text())
+    if(val > 1 && val <= 5){
+      val--;
+    }
+    $('.quant_en').html(val);
+ })
+
+ 
+ 

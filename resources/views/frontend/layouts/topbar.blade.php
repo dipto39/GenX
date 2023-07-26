@@ -107,7 +107,7 @@
             </div>
             <div class=" cursor-pointer bg-slate-50 text-gray-500 catebtn hidden ">
                 <div class="categoryicon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="25" viewBox="0 0 64 64" width=""
+                    <svg xmlns="http://www.w3.org/2000/svg" height="25" viewBox="0 0 64 64" width="25"
                         class="injected-svg" data-src="/assets/images/icons/categories.svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink">
                         <path
@@ -134,7 +134,7 @@
                             <div class="subcategory1">
                             @foreach ($Subcategories as $item2)
                              @if ($item2['cid'] == $item['id'])
-                                  <li><a href="{{url('/category/'.str_replace(' ','_',$item['subcname']))}}">{{$item2['subcname']}}</a></li>
+                                  <li><a href="{{url('/category/'.str_replace(' ','_',$item2['subcname']))}}">{{$item2['subcname']}}</a></li>
                              @endif
                                  
                              @endforeach
@@ -198,7 +198,7 @@
     <div class="navbar shadow-md py-2 hidden lg:block">
         <div class="container flex items-center justify-between">
             <div class="nav_left flex items-center cursor-pointer py-2 px-4 bg-slate-50">
-                <svg xmlns="http://www.w3.org/2000/svg" height="25" viewBox="0 0 64 64" width="" class="injected-svg"
+                <svg xmlns="http://www.w3.org/2000/svg" height="25" viewBox="0 0 64 64" width="25" class="injected-svg"
                     data-src="/assets/images/icons/categories.svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <path
                         d="m29 11v14a4 4 0 0 1 -4 4h-14a4 4 0 0 1 -4-4v-14a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4zm24-4h-14a4 4 0 0 0 -4 4v14a4 4 0 0 0 4 4h14a4 4 0 0 0 4-4v-14a4 4 0 0 0 -4-4zm-28 28h-14a4 4 0 0 0 -4 4v14a4 4 0 0 0 4 4h14a4 4 0 0 0 4-4v-14a4 4 0 0 0 -4-4zm21 0a11 11 0 1 0 11 11 11 11 0 0 0 -11-11z"

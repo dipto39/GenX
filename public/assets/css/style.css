@@ -839,6 +839,10 @@ video {
 .max-w-\[600px\] {
   max-width: 600px;
 }
+.w-\[600px\] {
+ width: 600px;
+}
+
 
 .flex-1 {
   flex: 1 1 0%;
@@ -883,6 +887,9 @@ video {
 
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .grid-cols-4 {

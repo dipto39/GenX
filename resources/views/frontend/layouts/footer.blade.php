@@ -3,7 +3,9 @@
         <div class="container footer_boxes grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
             <div class="footer_box ">
                 <div class="logo">
-                    <img src="./assets/logo/logo.png" alt="logo">
+                    <img src="@isset($setting)
+                    {{asset($setting[0]['logo'])}}
+                @endisset" alt="logo">
                 </div>
                 <div class="address">
                     <p>Le Solarium Tower 511 - Dubai Silicon Oasis, Dubai , United Arab Emirates. Phone: 04 342 5068,

@@ -18,10 +18,12 @@ use App\Http\Controllers\frontend\ChartController;
 use App\Http\Controllers\frontend\indexController;
 use App\Http\Controllers\frontend\loginController as FrontendLoginController;
 use App\Http\Controllers\frontend\ProfileController;
+use App\Http\Controllers\frontend\SectionController;
 use App\Http\Middleware\LoginCheck as MiddlewareLoginCheck;
 use App\Models\shipping;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Expr\FuncCall;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,15 +54,25 @@ Route::group(['middleware' => 'userLogin'],function(){
 
 // show Cart
 Route::get('/cart', [ChartController::class,'index'])->name('cart');
-
+ // Category View
+ Route::get('/category/{cname}',[SectionController::class,'getCategory']);
+ // single Product view
+ Route::get('/product/{cname}',[SectionController::class,'singleProduct']);
 
 Route::group(['middleware' => 'userLogout'],function(){
+
     // Show Profile 
     Route::get('/profile', [ProfileController::class,'index'])->name('profile');
     Route::get('/address', [ProfileController::class,'getAddress'])->name('address');
     Route::get('/address/add', [ProfileController::class,'getAddress'])->name('address');
+    Route::post('/orders', [ProfileController::class,'orders'])->name('frontend_orders');
     Route::get('/checkout', [ChartController::class,'checkout'])->name('checkout');
+    Route::post('/checkout', [ChartController::class,'postcheckout']);
 
+
+    // Get Shipping Charge by Ajax call
+    Route::post('/getShippingCarge/{id}', [ChartController::class,'getShipping']);
+    Route::post('/getPaymetMethod/{id}', [ChartController::class,'getPaymentMethod']);
 
     // Logout user
     Route::get('/logout', [FrontendLoginController::class,'logout']);
