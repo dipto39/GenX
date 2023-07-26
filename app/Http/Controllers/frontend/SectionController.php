@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
-    // get category and Sub category 
+    // get category
     public function getCategory(Request $req,$ct){
         $ct= str_replace('_',' ',$ct);
         $allcata= category::get()->all();
@@ -21,8 +21,27 @@ class SectionController extends Controller
             $cid = $value['id'];
            }
         }
-        $products=product::where('ct','=',$cid)->get();
-        if($cid == 0){
+        $allsubcata= Subcategories::where('cid','=',$cid)->get();
+        $subcid=[];
+        foreach ($allsubcata as  $value) {
+            array_push($subcid,["ct" => "s-".$value['sid']]);
+        }
+        $products=product::where('status','=',1)->where('ct',$cid)->orWhere(function($q) use ($subcid)
+        {
+           foreach($subcid as  $value)
+           {
+            $q->orWhere("ct", '=', $value);
+           }
+        })->get();
+        $brands= brand::where('status','=' ,'1')->get();
+        $data = compact('brands','products');
+        return view('frontend.section')->with($data);
+    }
+    //get Sub category 
+    public function getsubCategory(Request $req,$ct){
+        $ct= str_replace('_',' ',$ct);
+        $allcata= category::get()->all();
+        $cid=0;
             $allcata= Subcategories::get()->all();
             foreach ($allcata as $value) {
                 if($value['subcname'] == $ct){
@@ -30,7 +49,6 @@ class SectionController extends Controller
                 }
              }
         $products=product::where('ct','=',"s-".$cid)->get();
-        }
         if($cid == 0){
              $products=product::where('ct','=','none')->get();
         }
@@ -50,5 +68,9 @@ class SectionController extends Controller
         $brandName=$brand['bname'];
         $data =compact('product','pname','brandName','related');
          return view('frontend.single')->with($data);
+    }
+    // section View
+    public function ShowSection(Request $req,$name){
+        
     }
 }

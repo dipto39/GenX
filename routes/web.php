@@ -56,8 +56,12 @@ Route::group(['middleware' => 'userLogin'],function(){
 Route::get('/cart', [ChartController::class,'index'])->name('cart');
  // Category View
  Route::get('/category/{cname}',[SectionController::class,'getCategory']);
+ Route::get('/subcategory/{cname}',[SectionController::class,'getsubCategory']);
  // single Product view
  Route::get('/product/{cname}',[SectionController::class,'singleProduct']);
+ // Flash Deal
+ Route::get('/section/{cname}',[SectionController::class,'showSection']);
+
 
 Route::group(['middleware' => 'userLogout'],function(){
 

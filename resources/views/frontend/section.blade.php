@@ -157,7 +157,7 @@
 
                 </div>
                 <div class="result_count flex justify-between text-slate-500 text-[14px] p-4 mt-5">
-                    <p>Showing 1-{{count($product)}} of {{count($product)}} Products</p>
+                    <p>Showing 1-{{count($products)}} of {{count($products)}} Products</p>
                     <div class="pagination flex text-[20px]">
                         <div class="prev h-7 w-7 rounded-full border text-ThemeColor opacity-40 hover:opacity-100 border-ThemeColor flex justify-center items-center">
                             <a href=""><i class="fa-solid fa-angle-left"></i></a>

@@ -28,7 +28,7 @@
                        <div class="subcategory1">
                        @foreach ($Subcategories as $item2)
                         @if ($item2['cid'] == $item['id'])
-                             <li><a href="{{url('/category/'.str_replace(' ','_',$item['subcname']))}}">{{$item2['subcname']}}</a></li>
+                             <li><a href="{{url('/subcategory/'.str_replace(' ','_',$item['subcname']))}}">{{$item2['subcname']}}</a></li>
                         @endif
                             
                         @endforeach
