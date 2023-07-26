@@ -79,7 +79,7 @@
               
               <!-- Tab content -->
               <div id="pdescription" class="dr_content hidden p-5 border border-t-0">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. In recusandae, quae iure numquam vero ducimus dolore quaerat veritatis nobis hic unde illum accusantium repellat assumenda, omnis, modi minus sint optio.
+               {{$product[0]['des']}}
               </div>
               
               <div id="review" class="dr_content hidden p-5 border border-t-0">

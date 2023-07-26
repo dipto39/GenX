@@ -74,7 +74,7 @@
                     <span class="heading_name">Flash Deals</span>
                 </div>
                 <div class="heading_right">
-                    <a href="">
+                    <a href="{{url('/section/flash_deals')}}">
                         <span>View all</span>
                         <i class="fa-solid fa-caret-right"></i>
                     </a>
@@ -284,7 +284,12 @@
                 <div class="heading_left">
                     <span class="heading_name">More For you</span>
                 </div>
-                
+                <div class="heading_right">
+                    <a href="{{url('/section/for_you')}}">
+                        <span>View all</span>
+                        <i class="fa-solid fa-caret-right"></i>
+                    </a>
+                </div>
             </div>
             <div class="products ">
                 <div class="foryou_section grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-5">
