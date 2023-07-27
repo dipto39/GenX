@@ -265,7 +265,7 @@ function hmc(){
 }
 hmc();
 
-// showing cart option 
+// showing cart section 
 
 $('.cart_icon').on("click",(e)=>{
   $('.cart_sction').show();
@@ -656,6 +656,53 @@ $(document).on('click','.atoMainCart', function(e){
     }
     $('.quant_en').html(val);
  })
+
+ // filter and search product
+document.addEventListener('change',function(e){
+   if(e.target.classList.contains('section_filter')){
+    var minprice=document.getElementById('min_range').value
+    var maxprice=document.getElementById('max_range').value
+    var sname=document.getElementById('section_name').value
+  var checkboxes = document.getElementsByName('brand_val[]');
+  var status='ok';
+  var vals = "";
+  for (var i=0, n=checkboxes.length;i<n;i++) 
+  {
+      if (checkboxes[i].checked) 
+      {
+          vals += ","+checkboxes[i].value;
+      }
+  }
+  if (vals) vals = vals.substring(1);
+
+  let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    fetch('/section/filter/'+status, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": token
+                },
+            method: 'post',
+            credentials: "same-origin",
+            body: JSON.stringify({
+               brands:vals,
+               min:minprice,
+               max:maxprice,
+               sname:sname,
+            })
+        })
+        .then((Response) => Response.text())
+        .then((data) => {
+        document.querySelector('.dynamic_section').innerHTML =data
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+  }
+})
+
+
 
  
  

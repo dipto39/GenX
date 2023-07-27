@@ -94,19 +94,19 @@
                 <h3>About Us</h3>
                 <div class="links">
                     <li><a href="">Why Us</a></li>
-                    <li><a href="">Why Us</a></li>
-                    <li><a href="">Why Us</a></li>
-                    <li><a href="">Why Us</a></li>
-                    <li><a href="">Why Us</a></li>
+                    <li><a href="">Privacy Policy</a></li>
+                    <li><a href="">Terms & Conditions</a></li>
+                    <li><a href="">Help & FAQ</a></li>
+                    <li><a href="">Return Policy</a></li>
                 </div>
             </div>
             <div class="footer_box ">
                 <h3>Have a look</h3>
                 <div class="links">
-                    <li><a href="">Why Us</a></li>
-                    <li><a href="">Why Us</a></li>
-                    <li><a href="">Why Us</a></li>
-                    <li><a href="">Why Us</a></li>
+                    <li><a href="">Category</a></li>
+                    <li><a href="">Brand</a></li>
+                    <li><a href="">Solution</a></li>
+                    <li><a href="">Sell on Genx</a></li>
                 </div>
             </div>
             <div class="footer_box ">

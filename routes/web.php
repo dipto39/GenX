@@ -59,8 +59,10 @@ Route::get('/cart', [ChartController::class,'index'])->name('cart');
  Route::get('/subcategory/{cname}',[SectionController::class,'getsubCategory']);
  // single Product view
  Route::get('/product/{cname}',[SectionController::class,'singleProduct']);
- // Flash Deal
+ // section View
  Route::get('/section/{cname}',[SectionController::class,'showSection']);
+// filter section by fetch api
+Route::post('/section/filter/{val}',[SectionController::class,'filter_section']);
 
 
 Route::group(['middleware' => 'userLogout'],function(){

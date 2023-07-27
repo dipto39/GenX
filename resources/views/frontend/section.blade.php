@@ -5,17 +5,19 @@
 @section('content')
         <!-- category section start  -->
         <div class="category_page bg-themebg">
+            <input type="text" class="hidden" name="section_name " id="section_name" value="{{$sname}}">
+
             <div class="container flex py-10">
             <div class="cleft text-[15px] text-slate-700 bg-white p-6 rounded-lg">
                 <div class="price_range">
                     <h3 class="font-semibold pb-3">Price Range</h3>
                     <div class="flex items-center justify-center">
                         <div class="min_range_input">
-                            <input class="px-4 py-2 w-24 border rounded outline-1 outline-ThemeColor" type="number" name="" id="min_range">
+                            <input class="px-4 py-2 w-24 border rounded outline-1 outline-ThemeColor section_filter" type="number" name="" value="0" id="min_range">
                         </div>
                         <span class="text-[40px] text-slate-400 px-3 mb-2">-</span>
                         <div class="max_range_input">
-                            <input class="px-4 py-2 w-24 border rounded outline-1 outline-ThemeColor" type="number" name="" id="max_range">
+                            <input class="px-4 py-2 w-24 border rounded outline-1 outline-ThemeColor section_filter" type="number" name="" value="99999" id="max_range">
                         </div>
                     </div>
                 </div>
@@ -26,7 +28,7 @@
                     <div class="">
                     @foreach ($brands as $item)
                          <div class="single_brand mb-2 flex items-center">
-                            <input class="pr-2" type="checkbox" name="brand" value="{{$item['id']}}">
+                            <input class="pr-2 section_filter" type="checkbox" name="brand_val[]" value="{{$item['bid']}}">
                             <span class="pl-2">{{$item['bname']}}</span>
                         </div>
                     @endforeach
@@ -98,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cright">
+            <div class="cright dynamic_section">
                 <div class="products ">
                     @if (count($products) > 0)
                     <div class="grid grid-cols-3 gap-y-5">
